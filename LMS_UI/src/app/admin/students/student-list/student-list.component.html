@@ -1,0 +1,226 @@
+
+<div class="student-list-container">
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Student Management</h1>
+      <p>Manage all student records and information</p>
+    </div>
+    <div class="header-actions">
+      <button pButton label="Export CSV" icon="pi pi-download" class="p-button-outlined" (click)="exportToCSV()"></button>
+      <button pButton label="Add Student" icon="pi pi-plus" class="p-button-primary" (click)="addNewStudent()"></button>
+    </div>
+  </div>
+
+  <!-- FILTERS & SEARCH -->
+  <div class="filter-section">
+    <div class="search-container">
+      <span class="p-input-icon-left w-full">
+        <i class="pi pi-search"></i>
+        <input 
+          pInputText 
+          type="text" 
+          placeholder="Search students..." 
+          class="w-full"
+          #searchInput
+          (input)="onGlobalFilter(dt, $event)">
+      </span>
+    </div>
+
+    <div class="filters-row">
+      <p-select 
+        [options]="departmentOptions" 
+        [(ngModel)]="departmentFilter" 
+        placeholder="Filter by Department"
+        [showClear]="true"
+        class="filter-select">
+      </p-select>
+
+      <p-select 
+        [options]="statusOptions" 
+        [(ngModel)]="statusFilter" 
+        placeholder="Filter by Status"
+        [showClear]="true"
+        class="filter-select">
+      </p-select>
+
+      <button 
+        pButton 
+        label="Clear Filters" 
+        icon="pi pi-filter-slash" 
+        class="p-button-text"
+        (click)="searchInput.value=''; departmentFilter=null; statusFilter=null; dt.clear()">
+      </button>
+    </div>
+
+    <!-- Bulk Actions -->
+    @if(selectedStudents.length > 0) {
+      <div class="bulk-actions">
+        <div class="selection-info">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ selectedStudents.length }} student(s) selected</span>
+        </div>
+      <button pButton label="Delete Selected" icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="deleteSelectedStudents()"></button>
+    </div>}
+  </div>
+
+  <!-- STUDENTS TABLE -->
+  <div class="table-container">
+    <p-table 
+      #dt
+      [value]="students" 
+      [rows]="10" 
+      [paginator]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="loading"
+      [globalFilterFields]="['studentId', 'firstName', 'lastName', 'email', 'department']"
+      [(selection)]="selectedStudents"
+      dataKey="id"
+      [rowHover]="true"
+      styleClass="p-datatable-gridlines"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} students"
+      [showCurrentPageReport]="true">
+
+      <!-- Columns -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="studentId">
+            Student ID <p-sortIcon field="studentId"></p-sortIcon>
+          </th>
+          <th pSortableColumn="firstName">
+            Name <p-sortIcon field="firstName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            Contact <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="department">
+            Department <p-sortIcon field="department"></p-sortIcon>
+          </th>
+          <th pSortableColumn="semester" style="width: 10rem">
+            Semester <p-sortIcon field="semester"></p-sortIcon>
+          </th>
+          <th pSortableColumn="status" style="width: 10rem">
+            Status <p-sortIcon field="status"></p-sortIcon>
+          </th>
+          <th style="width: 12rem">Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="student"></p-tableCheckbox>
+          </td>
+          <td>
+            <span class="student-id">{{ student.studentId }}</span>
+          </td>
+          <td>
+            <div class="student-name-cell">
+              <div class="avatar">
+                {{ student.firstName.charAt(0) }}{{ student.lastName.charAt(0) }}
+              </div>
+              <div class="name-info">
+                <div class="full-name">{{ student.firstName }} {{ student.lastName }}</div>
+                <div class="enrollment-date">
+                  Enrolled: {{ student.enrollmentDate | date: 'MMM dd, yyyy' }}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="contact-info">
+              <div class="email">
+                <i class="pi pi-envelope"></i>
+                {{ student.email }}
+              </div>
+              <div class="phone">
+                <i class="pi pi-phone"></i>
+                {{ student.phone }}
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="department-badge">
+              <i class="pi pi-building"></i>
+              {{ student.department }}
+            </span>
+          </td>
+          <td class="text-center">
+            <span class="semester-badge">Semester {{ student.semester }}</span>
+          </td>
+          <td>
+            <p-tag 
+              [value]="student.status | titlecase" 
+              [severity]="getStatusSeverity(student.status)">
+            </p-tag>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button 
+                pButton 
+                type="button" 
+                icon="pi pi-eye" 
+                class="p-button-rounded p-button-text p-button-info"
+                pTooltip="View"
+                tooltipPosition="top"
+                (click)="viewStudent(student)">
+              </button>
+              <button 
+                pButton 
+                type="button" 
+                icon="pi pi-pencil" 
+                class="p-button-rounded p-button-text p-button-warning"
+                pTooltip="Edit"
+                tooltipPosition="top"
+                (click)="editStudent(student)">
+              </button>
+              <button 
+                pButton 
+                type="button" 
+                icon="pi pi-trash" 
+                class="p-button-rounded p-button-text p-button-danger"
+                pTooltip="Delete"
+                tooltipPosition="top"
+                (click)="deleteStudent(student)">
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Empty State -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">
+            <div class="empty-state">
+              <i class="pi pi-users"></i>
+              <h3>No Students Found</h3>
+              <p>Try adjusting your search or filters</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Loading State -->
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="8">
+            <div class="loading-state">
+              <i class="pi pi-spin pi-spinner"></i>
+              <span>Loading students...</span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<!-- Confirmation Dialog -->
+<p-confirmDialog></p-confirmDialog>
+
+<!-- Toast Messages -->
+<p-toast></p-toast>

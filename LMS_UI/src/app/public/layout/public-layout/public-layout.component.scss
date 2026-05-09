@@ -1,0 +1,32 @@
+// ════════════════════════Main Layout scss══════════════════════════════════
+// PUBLIC LAYOUT - MODERN @use SYNTAX
+// ═══════════════════════════════════════════════════════════
+
+@use 'styles/variables' as v;
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: v.$white;
+  position: relative;
+  overflow-x: hidden;
+
+  &__main {
+    flex: 1;
+    width: 100%;
+    padding-top: 0; // CRITICAL: Remove top padding to prevent gap under fixed navbar
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 1024px) {
+      padding-top: 0;
+    }
+  }
+}
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}

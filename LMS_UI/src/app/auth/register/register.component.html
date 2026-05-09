@@ -1,0 +1,119 @@
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <!-- Yellow Corner Boxes with Sci-Fi Random Pattern Animations (Top-Right & Bottom-Left) -->
+    <div class="corner-box corner-box-tr">
+      <div class="box-line line-1"></div>
+      <div class="box-line line-2"></div>
+      <div class="box-line line-3"></div>
+      <div class="box-line line-4"></div>
+      <div class="box-line line-5"></div>
+      <div class="box-line line-6"></div>
+    </div>
+    <div class="corner-box corner-box-bl">
+      <div class="box-line line-1"></div>
+      <div class="box-line line-2"></div>
+      <div class="box-line line-3"></div>
+      <div class="box-line line-4"></div>
+      <div class="box-line line-5"></div>
+      <div class="box-line line-6"></div>
+    </div>
+
+    <div class="inner-card">
+      <!-- Left Section - Welcome -->
+      <div class="signin-section">
+        <div class="image-overlay"></div>
+        <div class="content">
+          <h2>WELCOME BACK!</h2>
+          <p>Already have an account? Click below<br>to continue using the service.</p>
+          <button class="signin-btn" (click)="navigateToLogin()">SIGN IN</button>
+        </div>
+      </div>
+
+      <!-- Right Section - Sign Up -->
+      <div class="signup-section">
+        <div class="signup-header">
+          <h2>Create Account</h2>
+          <p class="social-text">or use your email account</p>
+        </div>
+
+        <div class="social-icons">
+          <a href="#" class="social-icon" (click)="socialSignup('facebook'); $event.preventDefault()" aria-label="Sign up with Facebook">
+            <i class="pi pi-facebook"></i>
+          </a>
+          <a href="#" class="social-icon" (click)="socialSignup('twitter'); $event.preventDefault()" aria-label="Sign up with Twitter">
+            <i class="pi pi-twitter"></i>
+          </a>
+          <a href="#" class="social-icon" (click)="socialSignup('linkedin'); $event.preventDefault()" aria-label="Sign up with LinkedIn">
+            <i class="pi pi-linkedin"></i>
+          </a>
+        </div>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                placeholder="Username" 
+                formControlName="username"
+                [class.error]="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+              >
+              <i class="pi pi-user"></i>
+            </div>
+            <div class="error-message" *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+              <span *ngIf="signupForm.get('username')?.errors?.['required']">Username is required</span>
+              <span *ngIf="signupForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                placeholder="Email" 
+                formControlName="email"
+                [class.error]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+              >
+              <i class="pi pi-envelope"></i>
+            </div>
+            <div class="error-message" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+              <span *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</span>
+              <span *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="Password" 
+                formControlName="password"
+                [class.error]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+              >
+              <i class="pi pi-lock"></i>
+              <i 
+                class="password-toggle pi" 
+                [class.pi-eye]="!showPassword" 
+                [class.pi-eye-slash]="showPassword"
+                (click)="togglePassword()"
+              ></i>
+            </div>
+            <div class="error-message" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+              <span *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</span>
+              <span *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="signupForm.invalid || isLoading">
+            <i class="pi pi-user-plus" *ngIf="!isLoading"></i>
+            <i class="pi pi-spinner pi-spin" *ngIf="isLoading"></i>
+            <span>{{ isLoading ? 'Creating Account...' : 'Sign Up' }}</span>
+          </button>
+        </form>
+
+        <div class="mobile-signin-link">
+          Already have an account? <a (click)="navigateToLogin()">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

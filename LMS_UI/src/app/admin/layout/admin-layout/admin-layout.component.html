@@ -1,0 +1,170 @@
+<div class="lms-admin" [attr.data-theme]="currentTheme">
+  
+  <!-- COMPACT SIDEBAR -->
+  <aside class="sidebar" [class.collapsed]="collapsed" [class.mobile-open]="mobileMenuOpen">
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-icon" [class.collapsed-icon]="collapsed">
+          <i class="pi pi-graduation-cap"></i>
+        </div>
+        <span class="brand-text" *ngIf="!collapsed">LMS</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <!-- Main -->
+      <div class="nav-group">
+        <div class="nav-label" *ngIf="!collapsed">MAIN</div>
+        <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-home"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Dashboard</span>
+          <span class="nav-badge" *ngIf="!collapsed">5</span>
+        </a>
+        <a routerLink="/admin/analytics" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-chart-line"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Analytics</span>
+        </a>
+      </div>
+
+      <!-- Management -->
+      <div class="nav-group">
+        <div class="nav-label" *ngIf="!collapsed">MANAGEMENT</div>
+        <a routerLink="/admin/students" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-users"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Students</span>
+        </a>
+        <a routerLink="/admin/teachers" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-user-edit"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Teachers</span>
+        </a>
+        <a routerLink="/admin/courses" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-book"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Courses</span>
+        </a>
+      </div>
+
+      <!-- Operations -->
+      <div class="nav-group">
+        <div class="nav-label" *ngIf="!collapsed">OPERATIONS</div>
+        <a routerLink="/admin/attendance" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-calendar-clock"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Attendance</span>
+        </a>
+        <a routerLink="/admin/grades" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-chart-bar"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Grades</span>
+        </a>
+        <a routerLink="/admin/finance" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-dollar"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Finance</span>
+        </a>
+      </div>
+
+      <!-- System -->
+      <div class="nav-group">
+        <div class="nav-label" *ngIf="!collapsed">SYSTEM</div>
+        <a routerLink="/admin/settings" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+          <div class="nav-icon"><i class="pi pi-cog"></i></div>
+          <span class="nav-text" *ngIf="!collapsed">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer" *ngIf="!collapsed">
+      <div class="user-card">
+        <div class="user-avatar">
+          <img src="https://i.pravatar.cc/150?img=12" alt="Admin">
+          <span class="status-dot"></span>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Sarah Johnson</div>
+          <div class="user-role">System Admin</div>
+        </div>
+        <button class="user-menu-btn" (click)="userMenu.toggle($event)">
+          <i class="pi pi-ellipsis-v"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Collapsed Footer -->
+    <div class="sidebar-footer-collapsed" *ngIf="collapsed">
+      <div class="user-avatar-small">
+        <img src="https://i.pravatar.cc/150?img=12" alt="Admin">
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" *ngIf="mobileMenuOpen" (click)="closeMobileMenu()"></div>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="main-content" [class.expanded]="collapsed">
+    
+    <!-- TOP NAVBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="collapse-btn" (click)="toggleSidebar()">
+          <i class="pi" [ngClass]="collapsed ? 'pi-chevron-right' : 'pi-chevron-left'"></i>
+        </button>
+        
+        <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+          <i class="pi pi-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="pi pi-search"></i>
+          <input type="text" placeholder="Search anything...">
+          <kbd>Ctrl K</kbd>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Quick Actions -->
+        <button class="quick-action" (click)="showQuickAdd()">
+          <i class="pi pi-plus"></i>
+          <span>Quick Add</span>
+        </button>
+
+        <!-- Notifications -->
+        <div class="topbar-icon" (click)="notifPanel.toggle($event)">
+          <i class="pi pi-bell"></i>
+          <span class="badge pulse">12</span>
+        </div>
+        <p-menu #notifPanel [model]="notifItems" [popup]="true" [appendTo]="'body'" styleClass="custom-menu"></p-menu>
+
+        <!-- Messages -->
+        <div class="topbar-icon">
+          <i class="pi pi-envelope"></i>
+          <span class="badge">5</span>
+        </div>
+
+        <!-- Theme Switcher -->
+        <div class="topbar-icon" (click)="themePanel.toggle($event)">
+          <i class="pi pi-palette"></i>
+        </div>
+        <p-menu #themePanel [model]="themeItems" [popup]="true" [appendTo]="'body'" styleClass="custom-menu theme-menu"></p-menu>
+
+        <!-- Profile -->
+        <div class="topbar-profile" (click)="profilePanel.toggle($event)">
+          <img src="https://i.pravatar.cc/150?img=12" alt="Profile">
+          <div class="profile-info">
+            <span class="profile-name">Sarah J.</span>
+            <i class="pi pi-chevron-down"></i>
+          </div>
+        </div>
+        <p-menu #profilePanel [model]="profileItems" [popup]="true" [appendTo]="'body'" styleClass="custom-menu"></p-menu>
+        <p-menu #userMenu [model]="userMenuItems" [popup]="true" [appendTo]="'body'" styleClass="custom-menu"></p-menu>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

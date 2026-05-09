@@ -1,0 +1,117 @@
+
+
+<section class="features-section" #featureSection>
+
+  <!-- ────────────────────────────────────────────────────
+       DECORATIVE BACKGROUND  ·  z-index: 0
+       ──────────────────────────────────────────────────── -->
+  <div class="features-bg" aria-hidden="true">
+    <div class="features-bg-aurora"></div>
+    <div class="features-bg-dots"></div>
+    <div class="features-bg-ring-1"></div>
+    <div class="features-bg-ring-2"></div>
+    <div class="features-bg-blob-1"></div>
+    <div class="features-bg-blob-2"></div>
+    <div class="features-bg-blob-3"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────
+       CONTENT  ·  z-index: 1
+       ──────────────────────────────────────────────────── -->
+  <div class="features-container">
+
+    <!-- ── Section Header ── -->
+    <div class="section-header">
+
+      <!-- Title: "Discover Our" in prussian-blue, "Features" in orange gradient -->
+      <h2 class="section-title">
+        Discover Our <span class="title-accent">Features</span>
+      </h2>
+
+      <p class="section-subtitle">
+        A high-performing university experience that instantly engages
+        with tailored, accessible information
+      </p>
+
+    </div>
+
+    <!-- ── Carousel ── -->
+    <div class="carousel-wrapper">
+
+      <!-- Cards Viewport — GSAP animates children here -->
+      <div class="cards-viewport" #cardsViewport>
+        <div class="cards-container" #cardsContainer>
+          <div
+            *ngFor="let card of visibleCards; let i = index"
+            class="feature-card"
+            [attr.data-index]="i"
+          >
+            <div class="card-inner">
+
+              <div class="card-icon-wrapper">
+                <!-- Animated dashed ring (appears on hover) -->
+                <div class="card-icon-ring" aria-hidden="true"></div>
+                <div class="card-icon">
+                  <i [class]="card.icon"></i>
+                </div>
+              </div>
+
+              <div class="card-content">
+                <h3 class="card-title">{{ card.title }}</h3>
+                <p class="card-description">{{ card.description }}</p>
+              </div>
+
+              <div class="card-action">
+                <button
+                  pButton
+                  class="card-cta"
+                  [label]="card.ctaText"
+                  (click)="onCardAction(card)"
+                ></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation: Arrows + Dots Together -->
+      <div class="carousel-navigation">
+
+        <button
+          class="nav-arrow"
+          (click)="previousGroup()"
+          [disabled]="currentGroup === 0"
+          aria-label="Previous cards"
+        >
+          <i class="pi pi-chevron-left"></i>
+        </button>
+
+        <div class="nav-dots" role="tablist" aria-label="Slide groups">
+          <button
+            *ngFor="let group of cardGroups; let i = index"
+            class="nav-dot"
+            [class.active]="i === currentGroup"
+            (click)="goToGroup(i)"
+            role="tab"
+            [attr.aria-selected]="i === currentGroup"
+            [attr.aria-label]="'Go to group ' + (i + 1)"
+          ></button>
+        </div>
+
+        <button
+          class="nav-arrow"
+          (click)="nextGroup()"
+          [disabled]="currentGroup === cardGroups.length - 1"
+          aria-label="Next cards"
+        >
+          <i class="pi pi-chevron-right"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

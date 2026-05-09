@@ -1,0 +1,533 @@
+// ═══════════════════════════════════════════════════════════
+// COURSES SECTION COMPONENT — LIGHT THEME
+// ═══════════════════════════════════════════════════════════
+
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+@use 'styles/animations';
+:host { display: block; }
+
+// ── SECTION ──────────────────────────────────────────────
+
+.courses-section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 8%  10%, rgba(v.$primary-light, 0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 45% at 92% 90%, rgba(v.$accent, 0.08)        0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 75% 15%, rgba(v.$accent-light, 0.05)  0%, transparent 55%),
+      linear-gradient(175deg, #f0f4fb 0%, v.$bg-white 45%, #fdfaf4 100%);
+    z-index: -3;
+  }
+
+  &::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(v.$primary, 0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 30%, transparent 100%);
+    z-index: -2;
+  }
+
+  @include m.viewport-laptop-hd { padding: 4.5rem 0; }
+  @include m.viewport-laptop-sm { padding: 4rem 0; }
+  @include m.viewport-netbook   { padding: 3rem 0; }
+}
+
+// ── DECORATIVE ELEMENTS ──────────────────────────────────
+
+.orb {
+  position: absolute; border-radius: 50%;
+  pointer-events: none; z-index: -1; will-change: transform;
+
+  &--1 {
+    width: clamp(280px, 32vw, 560px); height: clamp(280px, 32vw, 560px);
+    top: -12%; right: -10%;
+    background: radial-gradient(circle, rgba(v.$accent, 0.09) 0%, transparent 70%);
+    animation: float 9s ease-in-out infinite;
+    filter: blur(2px);
+  }
+  &--2 {
+    width: clamp(200px, 24vw, 420px); height: clamp(200px, 24vw, 420px);
+    bottom: 0; left: -8%;
+    background: radial-gradient(circle, rgba(v.$primary-light, 0.07) 0%, transparent 70%);
+    animation: float 12s ease-in-out infinite reverse;
+    animation-delay: -4s;
+  }
+}
+
+.geo-hex {
+  position: absolute; top: 7%; left: 3%;
+  width: 100px; height: 100px;
+  border: 1.5px solid rgba(v.$accent, 0.2);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: rotate 22s linear infinite;
+  pointer-events: none; z-index: -1;
+  @include m.respond-to-max('lg') { display: none; }
+}
+
+.geo-diamond {
+  position: absolute; bottom: 12%; right: 5%;
+  width: 52px; height: 52px;
+  border: 1.5px solid rgba(v.$accent, 0.25);
+  transform: rotate(45deg);
+  animation: pulse 4.5s ease-in-out infinite;
+  pointer-events: none; z-index: -1;
+  @include m.respond-to-max('md') { display: none; }
+}
+
+.geo-topline {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(v.$accent, 0.5) 25%,
+    rgba(v.$accent, 0.85) 50%,
+    rgba(v.$accent, 0.5) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+// ── CONTAINER ────────────────────────────────────────────
+
+.cs-container {
+  @include m.container;
+  position: relative; z-index: 1;
+}
+
+// ── HEADER ───────────────────────────────────────────────
+
+.cs-header {
+  text-align: center;
+  margin-bottom: v.$space-10;
+  animation: fadeInDown 0.85s ease-out both;
+  @include m.viewport-netbook { margin-bottom: v.$space-6; }
+}
+
+.cs-title {
+  @include m.heading-2;
+  color: v.$text-on-light;
+  line-height: 1.15;
+  margin-bottom: v.$space-4;
+
+  .highlight {
+    position: relative; display: inline-block;
+    color: v.$accent-dark;
+
+    &::after {
+      content: '';
+      position: absolute; bottom: -5px; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, v.$accent, v.$accent-light);
+      border-radius: v.$radius-full;
+      transform: scaleX(0); transform-origin: left;
+      animation: scaleXReveal 0.8s ease-out 0.9s both;
+    }
+  }
+
+  @include m.viewport-laptop-hd { font-size: v.$text-4xl; }
+  @include m.viewport-laptop-sm { font-size: v.$text-3xl; }
+  @include m.viewport-netbook   { font-size: v.$text-3xl; }
+}
+
+@keyframes scaleXReveal {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.cs-subtitle {
+  @include m.body-large;
+  color: v.$text-on-light-muted;
+  max-width: 560px; margin: 0 auto;
+  animation: fadeIn 0.8s ease-out 0.35s both;
+}
+
+// ── FILTER TABS ──────────────────────────────────────────
+
+.cs-filter {
+  @include m.flex-center;
+  flex-wrap: wrap; gap: v.$space-2;
+  margin-bottom: v.$space-10;
+  animation: fadeInUp 0.7s ease-out 0.45s both;
+  @include m.viewport-netbook { margin-bottom: v.$space-6; }
+}
+
+.filter-btn {
+  @include m.button-reset;
+  position: relative;
+  padding: v.$space-2 v.$space-5;
+  border-radius: v.$radius-full;
+  font-family: v.$font-body; font-size: v.$text-sm; font-weight: v.$font-medium;
+  color: v.$text-on-light-muted;
+  border: 1.5px solid rgba(v.$primary, 0.12);
+  background: rgba(v.$primary, 0.03);
+  cursor: pointer; transition: all v.$transition-base;
+  min-height: v.$min-touch-target; overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(v.$primary, 0.05), transparent);
+    transition: left 0.45s ease;
+  }
+
+  &:hover {
+    color: v.$text-on-light;
+    border-color: rgba(v.$primary, 0.25);
+    background: rgba(v.$primary, 0.06);
+    &::before { left: 100%; }
+  }
+
+  &.is-active {
+    color: v.$white; background: v.$primary; border-color: v.$primary;
+    font-weight: v.$font-semibold;
+    box-shadow: 0 4px 18px rgba(v.$primary, 0.2);
+    &:hover { background: v.$primary-light; border-color: v.$primary-light; }
+  }
+
+  &:focus-visible {
+    outline: v.$focus-outline-width solid v.$focus-outline-color;
+    outline-offset: v.$focus-outline-offset;
+  }
+}
+
+// ── GRID ─────────────────────────────────────────────────
+
+.cs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-6;
+
+  @include m.respond-to('sm')  { grid-template-columns: repeat(2, 1fr); }
+  @include m.respond-to('lg')  { grid-template-columns: repeat(3, 1fr); }
+  @include m.respond-to('3xl') { grid-template-columns: repeat(4, 1fr); gap: v.$space-8; }
+
+  @include m.viewport-laptop-hd { gap: v.$space-4; }
+  @include m.viewport-netbook   { gap: v.$space-4; }
+}
+
+// ── COURSE CARD ───────────────────────────────────────────
+
+.course-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: v.$radius-xl;
+  overflow: hidden;
+  background: linear-gradient(
+    150deg,
+    #{rgba(#f2f7fc, 3)} 80%,
+    #{rgba(#f6f9fcf8, 1)} 150%,
+      #{rgba(#b1cce7f8, 1)} 0%
+  );
+  border: 1px solid rgba(v.$primary, 0.08);
+  box-shadow: v.$shadow-md;
+  cursor: pointer;
+  transition: transform v.$transition-base, box-shadow v.$transition-base, border-color v.$transition-base;
+  will-change: transform;
+
+  // JS-controlled entrance
+  opacity: 0;
+  transform: translateY(24px);
+
+  &.is-visible {
+    animation: fadeInUp 0.65s ease-out both;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 28px 55px rgba(v.$primary, 0.12), 0 0 0 1.5px rgba(v.$accent, 0.3);
+    border-color: rgba(v.$accent, 0.3);
+
+    .card-thumb-img { transform: scale(1.08); }
+    .cta-btn        { opacity: 1; transform: translateY(0); }
+    .accent-bar     { transform: scaleX(1); }
+    .card-title     { color: v.$accent-dark; }
+    .thumb-overlay  { opacity: 0.45; }
+  }
+
+  &:focus-visible {
+    outline: v.$focus-outline-width solid v.$focus-outline-color;
+    outline-offset: 4px;
+  }
+
+  &--featured {
+    border-color: rgba(v.$accent, 0.22);
+    box-shadow: v.$shadow-lg;
+  }
+
+  @include m.viewport-laptop-hd { border-radius: v.$radius-lg; }
+  @include m.viewport-netbook   { border-radius: v.$radius-lg; }
+}
+
+// Glint sweep
+.course-card::before {
+  content: '';
+  position: absolute; top: -60%; left: -60%;
+  width: 40%; height: 220%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+  transform: rotate(25deg);
+  transition: left 0.55s ease;
+  pointer-events: none; z-index: 4;
+}
+.course-card:hover::before { left: 130%; }
+
+.accent-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, v.$accent 0%, v.$accent-light 70%, transparent 100%);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 3;
+}
+
+// ── THUMBNAIL ─────────────────────────────────────────────
+
+.card-thumb {
+  position: relative;
+  width: 100%;
+  height: 200px; // fixed height — no padding-bottom trick needed
+  overflow: hidden;
+  background: v.$primary; // solid fallback colour while image loads
+  flex-shrink: 0;
+
+  @include m.respond-to('lg')    { height: 190px; }
+  @include m.viewport-laptop-hd  { height: 175px; }
+  @include m.viewport-netbook    { height: 160px; }
+}
+
+.card-thumb-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  // Hide broken-image alt text / icon
+  color: transparent;
+  font-size: 0;
+}
+
+// Subtle dark overlay — deepens on hover for contrast with badge
+.thumb-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(v.$primary-dark, 0.25) 0%,
+    rgba(v.$primary-dark, 0.05) 60%,
+    transparent 100%
+  );
+  opacity: 0.3;
+  transition: opacity v.$transition-base;
+  pointer-events: none;
+}
+
+// ── BADGES ────────────────────────────────────────────────
+
+.badge-wrap {
+  position: absolute;
+  top: v.$space-3; left: v.$space-3;
+  z-index: 3; display: flex; gap: v.$space-2;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px v.$space-3;
+  border-radius: v.$radius-full;
+  font-size: 0.65rem; font-weight: v.$font-bold;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  background: rgba(v.$primary-dark, 0.55);
+  color: v.$white;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &.badge--accent  { background: v.$accent;            color: v.$primary-dark; border-color: transparent; }
+  &.badge--success { background: v.$success;           color: v.$white;        border-color: transparent; }
+  &.badge--hot     { background: rgba(239,68,68,0.85); color: v.$white;        border-color: transparent; }
+}
+
+// ── CARD BODY ─────────────────────────────────────────────
+
+.card-body {
+  flex: 1; // fills remaining space, pushing footer down
+  padding: v.$space-4 v.$space-5 v.$space-3;
+  position: relative; z-index: 1;
+
+  @include m.viewport-laptop-hd { padding: v.$space-3 v.$space-4 v.$space-2; }
+  @include m.viewport-netbook   { padding: v.$space-3 v.$space-4 v.$space-2; }
+}
+
+.card-category {
+  font-size: v.$text-xs; font-weight: v.$font-semibold;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: v.$accent-dark; margin-bottom: v.$space-2;
+  display: flex; align-items: center; gap: v.$space-1;
+
+  &::before {
+    content: ''; display: inline-block;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: v.$accent; flex-shrink: 0;
+  }
+}
+
+.card-title {
+  font-family: v.$font-heading;
+  font-size: v.$text-lg; font-weight: v.$font-semibold;
+  color: v.$text-on-light; line-height: v.$leading-snug;
+  margin-bottom: v.$space-3;
+  @include m.line-clamp(2);
+  transition: color v.$transition-fast;
+
+  @include m.viewport-laptop-hd { font-size: v.$text-base; }
+  @include m.viewport-netbook   { font-size: v.$text-base; }
+}
+
+.card-desc {
+  font-size: v.$text-sm; color: v.$text-on-light-muted;
+  line-height: v.$leading-relaxed; @include m.line-clamp(2);
+  margin-bottom: v.$space-4;
+  @include m.viewport-netbook { display: none; }
+}
+
+// ── INSTRUCTOR ────────────────────────────────────────────
+
+.card-instructor {
+  display: flex; align-items: center;
+  gap: v.$space-2; margin-bottom: v.$space-3;
+}
+
+.avatar-placeholder {
+  width: 28px; height: 28px; border-radius: 50%;
+  flex-shrink: 0; @include m.flex-center;
+  font-size: 0.65rem; font-weight: v.$font-bold; color: v.$white;
+  border: 2px solid rgba(v.$accent, 0.35);
+
+  &.av-1 { background: linear-gradient(135deg, v.$accent,   v.$primary); }
+  &.av-2 { background: linear-gradient(135deg, #2563eb,     v.$primary); }
+  &.av-3 { background: linear-gradient(135deg, v.$success,  v.$primary); }
+  &.av-4 { background: linear-gradient(135deg, #8b5cf6,     v.$primary); }
+  &.av-5 { background: linear-gradient(135deg, #b45309,     v.$accent);  }
+  &.av-6 { background: linear-gradient(135deg, #334155,     v.$blue-500);}
+}
+
+.instructor-name {
+  font-size: v.$text-sm;
+  color: v.$text-on-light-secondary;
+  font-weight: v.$font-medium;
+}
+
+// ── CARD STATS ────────────────────────────────────────────
+
+.card-stats {
+  display: flex; align-items: center;
+  flex-wrap: wrap; gap: v.$space-3;
+  padding: v.$space-3 0;
+  border-top: 1px solid rgba(v.$primary, 0.08);
+}
+
+.card-stat {
+  display: flex; align-items: center;
+  gap: 4px; font-size: v.$text-xs;
+  color: v.$text-on-light-muted; white-space: nowrap;
+  svg { width: 12px; height: 12px; opacity: 0.65; flex-shrink: 0; }
+}
+
+.card-rating { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+
+.star {
+  font-size: 11px; color: rgba(v.$primary, 0.15);
+  &.on { color: v.$accent; }
+}
+
+.rating-num {
+  font-size: v.$text-xs; color: v.$text-on-light-secondary;
+  font-weight: v.$font-medium; margin-left: 2px;
+}
+
+// ── CARD FOOTER ───────────────────────────────────────────
+
+.card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: v.$space-2 v.$space-5 v.$space-5; gap: v.$space-3;
+
+  @include m.viewport-laptop-hd { padding: v.$space-2 v.$space-4 v.$space-4; }
+  @include m.viewport-netbook   { padding: v.$space-2 v.$space-3 v.$space-3; }
+}
+
+.price-wrap { display: flex; align-items: baseline; gap: v.$space-2; }
+
+.price {
+  font-family: v.$font-heading;
+  font-size: v.$text-xl; font-weight: v.$font-bold;
+  color: v.$text-on-light;
+  &.price--free { color: v.$success; }
+}
+
+.price-original {
+  font-size: v.$text-sm; color: v.$text-on-light-muted;
+  text-decoration: line-through;
+}
+
+.cta-btn {
+  @include m.button-reset;
+  display: inline-flex; align-items: center; gap: v.$space-2;
+  padding: v.$space-2 v.$space-4; border-radius: v.$radius-base;
+  font-family: v.$font-body; font-size: v.$text-sm; font-weight: v.$font-semibold;
+  background: v.$primary; color: v.$white;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity v.$transition-base, transform v.$transition-base,
+              background v.$transition-fast, box-shadow v.$transition-fast;
+  white-space: nowrap; cursor: pointer;
+
+  &:hover {
+    background: v.$primary-light;
+    box-shadow: 0 6px 20px rgba(v.$primary, 0.28);
+  }
+
+  svg { width: 13px; height: 13px; transition: transform v.$transition-fast; }
+  &:hover svg { transform: translateX(3px); }
+
+  &:focus-visible {
+    outline: v.$focus-outline-width solid v.$focus-outline-color;
+    outline-offset: v.$focus-outline-offset;
+  }
+}
+
+@media (hover: none) {
+  .cta-btn { opacity: 1; transform: translateY(0); }
+}
+
+// ── SECTION CTA ───────────────────────────────────────────
+
+.cs-cta-wrap {
+  @include m.flex-center;
+  margin-top: v.$space-12;
+  animation: fadeInUp 0.7s ease-out 1s both;
+  @include m.viewport-netbook { margin-top: v.$space-8; }
+}
+
+.section-cta {
+  @include m.button-primary;
+  font-size: v.$text-base;
+  padding: v.$space-4 v.$space-10; gap: v.$space-3;
+
+  .arrow { transition: transform v.$transition-fast; }
+  &:hover .arrow { transform: translateX(4px); }
+}
+
+// ── REDUCED MOTION ────────────────────────────────────────
+
+@include m.reduced-motion {
+  .orb--1, .orb--2, .geo-hex, .geo-diamond { animation: none !important; }
+  .course-card { opacity: 1; transform: none; transition: none; }
+  .cta-btn     { opacity: 1; transform: none; transition: none; }
+}

@@ -1,0 +1,376 @@
+// ═══════════════════════════════════════════════════════════
+// GLOBAL STYLES - MODERN @use WITH @forward
+// Includes: Modern Normalize + Your Custom Reset + Base Styles
+// ═══════════════════════════════════════════════════════════
+
+@forward 'styles/variables';
+@forward 'styles/mixins';
+@forward 'styles/animations';
+
+@use 'styles/variables' as v;
+@use 'styles/mixins';
+
+/* ──────────────────────────────────────────────────────────
+   LAYER 1: MODERN BROWSER NORMALIZE
+   Strips UA defaults without being destructive.
+   Only resets what browsers actually disagree on.
+   ────────────────────────────────────────────────────────── */
+
+// Use standards-track document structure
+:where(html) {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Remove default margin/padding on ALL elements + set box-sizing
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Consistent rule colour
+hr {
+  color: inherit;
+  border-top-width: 1px;
+  height: 0;
+}
+
+// Make abbr title dotted (normalize behaviour)
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+// Correct heading font weight in Blink/WebKit
+b,
+strong {
+  font-weight: bolder;
+}
+
+// Normalise code/pre font size
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 1em;
+}
+
+// Prevent sub/sup from affecting line height
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub  { bottom: -0.25em; }
+sup  { top: -0.5em; }
+
+// Tables
+table {
+  border-collapse: collapse;
+  border-color: inherit;
+  text-indent: 0;
+}
+
+// Forms: inherit font everywhere
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+// Remove button default UA appearance
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+  appearance: button;
+  background-image: none;
+}
+
+// Remove inner focus ring in Firefox
+:-moz-focusring {
+  outline: auto;
+}
+
+// Remove invalid pseudo-class styles in Firefox
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+// Restore pointer on legend
+legend {
+  padding: 0;
+}
+
+// Progress bar display fix
+progress {
+  vertical-align: baseline;
+}
+
+// Text area resize only vertical by default
+textarea {
+  resize: vertical;
+}
+
+// Search input normalise
+[type='search'] {
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+// Consistent summary pointer
+summary {
+  display: list-item;
+}
+
+// Fieldset border reset
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+// Prevent dialog backdrop UA styles from bleeding
+dialog {
+  padding: 0;
+}
+
+/* ──────────────────────────────────────────────────────────
+   LAYER 2: YOUR CUSTOM RESET
+   Opinionated resets on top of the normalize above.
+   ────────────────────────────────────────────────────────── */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  // Prevent layout shift from scrollbar appearing
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: v.$font-body;
+  font-size: v.$text-base;
+  line-height: v.$leading-normal;
+  color: v.$text-on-light;
+  background-color: v.$bg-white;
+  overflow-x: hidden;
+  // Prevent 300ms tap delay on mobile
+  touch-action: manipulation;
+}
+
+// Headings inherit color from context; font is set globally
+h1, h2, h3, h4, h5, h6 {
+  font-family: v.$font-heading;
+  font-weight: v.$font-bold;
+  line-height: v.$leading-tight;
+  color: inherit;
+  // Prevent orphaned words in headings
+  text-wrap: balance;
+}
+
+// Paragraphs — improve readability
+p {
+  text-wrap: pretty;
+}
+
+// Links
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color v.$transition-base;
+
+  &:hover {
+    color: v.$accent;
+  }
+}
+
+// Images / Media
+img,
+video,
+canvas,
+audio,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Enforce pointer on interactive elements
+button {
+  cursor: pointer;
+  font-family: inherit;
+  background: none;
+  border: none;
+}
+
+// Lists: styled resets only where semantic list behaviour is irrelevant
+ul,
+ol {
+  list-style: none;
+}
+
+// Input / select / textarea
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  // Remove UA default appearance on iOS
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0; // iOS adds rounding by default
+}
+
+// Hidden utility (preserves accessibility tree)
+[hidden] {
+  display: none !important;
+}
+
+// Disabled state hint
+[disabled] {
+  cursor: not-allowed;
+}
+
+/* ──────────────────────────────────────────────────────────
+   LAYER 3: GLOBAL FOCUS VISIBLE
+   WCAG 2.1 AA compliant — visible keyboard focus ring.
+   Do not remove. Do not set outline: none globally.
+   ────────────────────────────────────────────────────────── */
+
+*:focus-visible {
+  outline: v.$focus-outline-width solid v.$focus-outline-color;
+  outline-offset: v.$focus-outline-offset;
+}
+
+// Remove focus ring on non-keyboard interactions (mouse/touch)
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PRIMENG MENU OVERRIDES
+   (unchanged from your original — kept intact)
+   ════════════════════════════════════════════════════════════ */
+
+body {
+  .p-menu.p-component,
+  .p-tieredmenu.p-component,
+  .p-contextmenu.p-component {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    padding: 0.5rem !important;
+    border-radius: 12px !important;
+    min-width: 200px !important;
+
+    .p-menu-list {
+      background: #ffffff !important;
+      padding: 0 !important;
+    }
+
+    .p-menuitem {
+      background: transparent !important;
+      margin: 2px 0 !important;
+
+      .p-menuitem-content {
+        background: transparent !important;
+        border-radius: 8px !important;
+      }
+    }
+
+    .p-menuitem-link {
+      background: transparent !important;
+      padding: 0.75rem 1rem !important;
+      transition: all 0.2s ease !important;
+      border-radius: 8px !important;
+
+      .p-menuitem-text {
+        color: #374151 !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+      }
+
+      .p-menuitem-icon {
+        color: #6b7280 !important;
+        margin-right: 0.75rem !important;
+      }
+    }
+
+    .p-menuitem-link:hover,
+    .p-menuitem-content:hover {
+      background: #f3f4f6 !important;
+
+      .p-menuitem-text {
+        color: #0891b2 !important;
+      }
+
+      .p-menuitem-icon {
+        color: #0891b2 !important;
+      }
+    }
+
+    .p-menuitem-link:focus {
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    .p-menu-separator,
+    .p-menuitem-separator {
+      border-top: 1px solid #f3f4f6 !important;
+      margin: 0.5rem 0 !important;
+    }
+
+    .p-submenu-header {
+      background: #ffffff !important;
+      color: #9ca3af !important;
+      font-weight: 700 !important;
+      font-size: 0.7rem !important;
+      text-transform: uppercase !important;
+      padding: 0.5rem 1rem !important;
+    }
+  }
+}
+
+.p-tieredmenu .p-menuitem-link .p-submenu-icon {
+  color: #374151 !important;
+}

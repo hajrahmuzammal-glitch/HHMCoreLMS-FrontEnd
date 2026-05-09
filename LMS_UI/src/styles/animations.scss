@@ -1,0 +1,513 @@
+// ═══════════════════════════════════════════════════════════
+// ANIMATION KEYFRAMES
+// Reusable animations for smooth, professional interactions
+// ═══════════════════════════════════════════════════════════
+
+/* ──────────────────────────────────────────────────────────
+   FADE ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   SLIDE ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   SCALE ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   ROTATION ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   BOUNCE ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  70% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   SHIMMER/LOADING ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   CUSTOM ANIMATIONS FOR YOUR LMS
+   ────────────────────────────────────────────────────────── */
+
+// Floating animation for background elements
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+// Gradient animation
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Wave animation for underlines
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Typing animation
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+// Blink animation for cursor
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   ATTENTION-GRABBING ANIMATIONS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes heartbeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  10%,
+  30% {
+    transform: scale(1.1);
+  }
+
+  20%,
+  40% {
+    transform: scale(1);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   UTILITY ANIMATION CLASSES
+   Apply directly in HTML: class="animate-fade-in"
+   ────────────────────────────────────────────────────────── */
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out both;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s ease-out both;
+}
+
+// Stagger delays for sequential animations
+.animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-5 {
+  animation-delay: 0.5s;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   ACCESSIBILITY: RESPECT USER PREFERENCES
+   Disable animations if user prefers reduced motion
+   ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes flyInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-36px) scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flyInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(36px) scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flyInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flyInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-36px) scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────
+   NOTES FOR BEGINNERS
+   ────────────────────────────────────────────────────────── */
+
+/*
+  HOW TO USE ANIMATIONS:
+  
+  METHOD 1: Utility Classes (Easiest)
+  
+  <div class="animate-fade-in animate-delay-2">
+    Content fades in with 0.2s delay
+  </div>
+  
+  METHOD 2: Custom CSS
+  
+  .my-element {
+    animation: slideInLeft 0.8s ease-out 0.3s both;
+    //       ↑name     ↑duration ↑easing ↑delay ↑fill-mode
+  }
+  
+  METHOD 3: Using Mixins (Most Professional)
+  
+  .hero-title {
+    @include fade-in(0.8s, 0.2s);
+  }
+  
+  ANIMATION PROPERTIES EXPLAINED:
+  
+  - animation-name: which @keyframes to use
+  - animation-duration: how long it takes (0.3s, 1s, etc.)
+  - animation-timing-function: easing (ease, ease-in-out, etc.)
+  - animation-delay: when to start (0s, 0.2s, etc.)
+  - animation-fill-mode:
+      - forwards: Keep final state after animation
+      - backwards: Apply first keyframe before animation
+      - both: Both forwards and backwards
+  
+  BEST PRACTICES:
+  
+  1. Don't animate too many elements at once (overwhelming)
+  2. Use stagger delays for sequential animations
+  3. Keep animations under 1 second (users have short attention)
+  4. Always respect prefers-reduced-motion
+  5. Test on actual devices (can feel different than desktop)
+  6. Subtle > Flashy (professional websites are subtle)
+  
+  PERFORMANCE TIPS:
+  
+  - Animate transform and opacity (GPU accelerated)
+  - Avoid animating width, height, top, left (causes reflows)
+  - Use will-change: transform on elements that will animate
+  - Remove animations on mobile if performance suffers
+*/

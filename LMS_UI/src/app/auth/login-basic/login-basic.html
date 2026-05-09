@@ -1,0 +1,165 @@
+<div class="login-wrapper">
+  <!-- Animated Particle Canvas Background -->
+  <canvas #canvas class="particle-canvas"></canvas>
+
+  <!-- TOP LEFT LOGO -->
+  <a routerLink="/home" class="top-logo">
+    <div class="logo-icon">
+      <i class="pi pi-graduation-cap"></i>
+    </div>
+    <span class="logo-text">LMS</span>
+  </a>
+
+  <!-- Floating 3D Elements - 6 ICONS -->
+  <div class="floating-elements">
+    <div class="float-element element-1">
+      <i class="pi pi-book"></i>
+    </div>
+    <div class="float-element element-2">
+      <i class="pi pi-sign-in"></i>
+    </div>
+    <div class="float-element element-3">
+      <i class="pi pi-trophy"></i>
+    </div>
+    <div class="float-element element-4">
+      <i class="pi pi-users"></i>
+    </div>
+    <div class="float-element element-5">
+      <i class="pi pi-star"></i>
+    </div>
+    <div class="float-element element-6">
+      <i class="pi pi-graduation-cap"></i>
+    </div>
+  </div>
+
+  <!-- Main Login Container - LARGER CARD -->
+  <div class="login-container">
+    <!-- Glass Card -->
+    <div class="glass-card">
+      <!-- Card Content -->
+      <div class="card-content">
+        <!-- Title Section with Orange Heading -->
+        <div class="header-section">
+          <h1 class="title-main">WELCOME BACK</h1>
+          <p class="title-sub">Sign in to continue your learning journey</p>
+          <div class="title-line"></div>
+        </div>
+
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          <!-- Email Input -->
+          <div class="form-group">
+            <label class="form-label">
+              <i class="pi pi-envelope"></i>
+              <span>Email Address</span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                formControlName="email"
+                placeholder="your.email@university.edu"
+                class="form-input"
+                [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+              >
+            </div>
+            @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+              <div class="error-message">
+                <i class="pi pi-exclamation-circle"></i>
+                @if (loginForm.get('email')?.errors?.['required']) {
+                  <span>Email is required</span>
+                }
+                @if (loginForm.get('email')?.errors?.['email']) {
+                  <span>Please enter a valid email</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <label class="form-label">
+              <i class="pi pi-lock"></i>
+              <span>Password</span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                formControlName="password"
+                placeholder="Enter your password"
+                class="form-input"
+                [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+              >
+              <button 
+                type="button" 
+                class="password-toggle" 
+                (click)="togglePassword()"
+                tabindex="-1"
+              >
+                <i class="pi" [class.pi-eye]="!showPassword" [class.pi-eye-slash]="showPassword"></i>
+              </button>
+            </div>
+            @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+              <div class="error-message">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>Password is required</span>
+              </div>
+            }
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="form-extras">
+            <label class="remember-checkbox">
+              <input type="checkbox" formControlName="rememberMe">
+              <span class="checkmark">
+                <i class="pi pi-check"></i>
+              </span>
+              <span class="remember-text">Remember me</span>
+            </label>
+            <button type="button" class="forgot-link" (click)="forgotPassword()">
+              Forgot Password?
+            </button>
+          </div>
+
+          <!-- Login Button - ALWAYS VISIBLE -->
+          <button type="submit" class="submit-button" [disabled]="loginForm.invalid || isLoading">
+            <span class="button-content">
+              @if (isLoading) {
+                <i class="pi pi-spinner pi-spin"></i>
+                <span>SIGNING IN...</span>
+              } @else {
+                <i class="pi pi-sign-in"></i>
+                <span>SIGN IN</span>
+              }
+            </span>
+          </button>
+        </form>
+
+        <!-- Social Login -->
+        <div class="social-section">
+          <span class="social-text">OR SIGN IN WITH</span>
+          <div class="social-icons">
+            <button type="button" class="social-icon" (click)="socialLogin('google')">
+              <i class="pi pi-google"></i>
+            </button>
+            <button type="button" class="social-icon" (click)="socialLogin('microsoft')">
+              <i class="pi pi-microsoft"></i>
+            </button>
+            <button type="button" class="social-icon" (click)="socialLogin('apple')">
+              <i class="pi pi-apple"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Register Link -->
+        <div class="register-section">
+          <p class="register-text">
+            Don't have an account?
+            <button type="button" class="register-link" (click)="navigateToRegister()">
+              Create Account
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,929 @@
+// ============================================
+// LOCAL VARIABLES
+// ============================================
+$primary-orange: #FF6B35;        // EXACT Orange color
+$accent-light: #FF8C5A;          // Lighter orange for gradients
+$secondary-blue: #004E89;        // Dark blue
+$light-blue: #97CAD8;            // 2nd lightest blue from palette - BACKGROUND
+$background-blue: #D4EBF5;       // Even lighter blue
+$dark: #1A1A2E;
+$font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+// $font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+
+// ============================================
+// MAIN WRAPPER - FIXED CENTERING
+// ============================================
+.auth-wrapper {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Gradient background from darkest to lightest
+  background: linear-gradient(135deg, 
+    #001B48 0%, 
+    #024267 25%, 
+    #036BA8 50%, 
+    #97CAD8 75%, 
+    #D6E8EE 100%
+  );
+  
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+// ============================================
+// AUTH CONTAINER - CENTERED
+// ============================================
+.auth-container {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 1100px;
+  height: auto;
+  max-height: 90vh;
+  display: flex;
+  overflow: visible;
+}
+
+// ============================================
+// INNER CARD (White background with rounded corners)
+// ============================================
+.inner-card {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0, 78, 137, 0.25);
+  display: flex;
+  background: transparent;
+  animation: slideIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ============================================
+// ORANGE CORNER BOXES - MIRRORED POSITIONS
+// Top-Left & Bottom-Right (opposite of register page)
+// ============================================
+.corner-box {
+  position: absolute;
+  background: linear-gradient(135deg, $primary-orange 0%, $accent-light 100%);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+  border-radius: 30px;
+}
+
+.corner-box-tl {
+  top: -60px;
+  left: -150px;
+  width: 330px;
+  height: 200px;
+  border-radius: 30px;
+}
+
+.corner-box-br {
+  bottom: -60px;
+  right: -130px;
+  width: 260px;
+  height: 220px;
+  border-radius: 10px;
+}
+
+// ============================================
+// SCI-FI RANDOM PATTERN LINES
+// ============================================
+.box-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+}
+
+// Top Left Box - Random Sci-Fi Patterns
+.corner-box-tl {
+  .line-1 {
+    width: 2px;
+    height: 0;
+    left: 20%;
+    top: 0;
+    animation: randomLineDown1 4s ease-in-out infinite;
+  }
+
+  .line-2 {
+    width: 0;
+    height: 2px;
+    top: 25%;
+    right: 0;
+    animation: randomLineLeft1 3.5s ease-in-out infinite 0.5s;
+  }
+
+  .line-3 {
+    width: 2px;
+    height: 0;
+    left: 50%;
+    top: 0;
+    animation: randomLineDown2 3.8s ease-in-out infinite 1s;
+  }
+
+  .line-4 {
+    width: 0;
+    height: 2px;
+    top: 60%;
+    right: 0;
+    animation: randomLineLeft2 4.2s ease-in-out infinite 1.5s;
+  }
+
+  .line-5 {
+    width: 2px;
+    height: 0;
+    left: 75%;
+    top: 0;
+    animation: randomLineDown3 3.2s ease-in-out infinite 2s;
+  }
+
+  .line-6 {
+    width: 0;
+    height: 2px;
+    top: 85%;
+    right: 0;
+    animation: randomLineLeft3 3.9s ease-in-out infinite 2.5s;
+  }
+}
+
+// Bottom Right Box - Random Sci-Fi Patterns
+.corner-box-br {
+  .line-1 {
+    width: 2px;
+    height: 0;
+    right: 25%;
+    bottom: 0;
+    animation: randomLineUp1 3.7s ease-in-out infinite;
+  }
+
+  .line-2 {
+    width: 0;
+    height: 2px;
+    bottom: 30%;
+    right: 0;
+    animation: randomLineLeft1 4.1s ease-in-out infinite 0.6s;
+  }
+
+  .line-3 {
+    width: 2px;
+    height: 0;
+    right: 55%;
+    bottom: 0;
+    animation: randomLineUp2 3.4s ease-in-out infinite 1.2s;
+  }
+
+  .line-4 {
+    width: 0;
+    height: 2px;
+    bottom: 55%;
+    right: 0;
+    animation: randomLineLeft2 3.6s ease-in-out infinite 1.8s;
+  }
+
+  .line-5 {
+    width: 2px;
+    height: 0;
+    right: 80%;
+    bottom: 0;
+    animation: randomLineUp3 4.3s ease-in-out infinite 2.3s;
+  }
+
+  .line-6 {
+    width: 0;
+    height: 2px;
+    bottom: 80%;
+    right: 0;
+    animation: randomLineLeft3 3.3s ease-in-out infinite 2.8s;
+  }
+}
+
+// ============================================
+// ANIMATIONS - Vertical Lines (Down & Up)
+// ============================================
+@keyframes randomLineDown1 {
+  0% { height: 0; opacity: 0; }
+  20% { opacity: 1; box-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
+  40% { height: 60%; }
+  60% { height: 100%; box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+  80% { opacity: 0.7; }
+  100% { height: 100%; opacity: 0; }
+}
+
+@keyframes randomLineDown2 {
+  0% { height: 0; opacity: 0; }
+  15% { opacity: 1; }
+  35% { height: 40%; box-shadow: 0 0 18px rgba(255, 255, 255, 0.8); }
+  55% { height: 80%; }
+  75% { height: 100%; box-shadow: 0 0 25px rgba(255, 255, 255, 1); }
+  90% { opacity: 0.6; }
+  100% { height: 100%; opacity: 0; }
+}
+
+@keyframes randomLineDown3 {
+  0% { height: 0; opacity: 0; }
+  25% { opacity: 1; box-shadow: 0 0 12px rgba(255, 255, 255, 0.7); }
+  45% { height: 50%; }
+  65% { height: 90%; box-shadow: 0 0 22px rgba(255, 255, 255, 0.95); }
+  85% { opacity: 0.8; }
+  100% { height: 100%; opacity: 0; }
+}
+
+@keyframes randomLineUp1 {
+  0% { height: 0; opacity: 0; }
+  18% { opacity: 1; }
+  38% { height: 55%; box-shadow: 0 0 16px rgba(255, 255, 255, 0.85); }
+  58% { height: 95%; }
+  78% { height: 100%; box-shadow: 0 0 23px rgba(255, 255, 255, 1); }
+  88% { opacity: 0.7; }
+  100% { height: 100%; opacity: 0; }
+}
+
+@keyframes randomLineUp2 {
+  0% { height: 0; opacity: 0; }
+  22% { opacity: 1; box-shadow: 0 0 14px rgba(255, 255, 255, 0.75); }
+  42% { height: 45%; }
+  62% { height: 85%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.9); }
+  82% { opacity: 0.65; }
+  100% { height: 100%; opacity: 0; }
+}
+
+@keyframes randomLineUp3 {
+  0% { height: 0; opacity: 0; }
+  28% { opacity: 1; }
+  48% { height: 50%; box-shadow: 0 0 17px rgba(255, 255, 255, 0.8); }
+  68% { height: 92%; }
+  88% { height: 100%; box-shadow: 0 0 24px rgba(255, 255, 255, 1); }
+  95% { opacity: 0.75; }
+  100% { height: 100%; opacity: 0; }
+}
+
+// ============================================
+// ANIMATIONS - Horizontal Lines (Left Direction)
+// ============================================
+@keyframes randomLineLeft1 {
+  0% { width: 0; opacity: 0; }
+  20% { opacity: 1; }
+  40% { width: 50%; box-shadow: 0 0 15px rgba(255, 255, 255, 0.85); }
+  60% { width: 90%; }
+  80% { width: 100%; box-shadow: 0 0 22px rgba(255, 255, 255, 1); }
+  90% { opacity: 0.7; }
+  100% { width: 100%; opacity: 0; }
+}
+
+@keyframes randomLineLeft2 {
+  0% { width: 0; opacity: 0; }
+  25% { opacity: 1; box-shadow: 0 0 13px rgba(255, 255, 255, 0.75); }
+  45% { width: 45%; }
+  65% { width: 85%; box-shadow: 0 0 19px rgba(255, 255, 255, 0.9); }
+  85% { opacity: 0.65; }
+  100% { width: 100%; opacity: 0; }
+}
+
+@keyframes randomLineLeft3 {
+  0% { width: 0; opacity: 0; }
+  30% { opacity: 1; }
+  50% { width: 55%; box-shadow: 0 0 16px rgba(255, 255, 255, 0.8); }
+  70% { width: 95%; }
+  90% { width: 100%; box-shadow: 0 0 21px rgba(255, 255, 255, 0.95); }
+  95% { opacity: 0.8; }
+  100% { width: 100%; opacity: 0; }
+}
+
+// ============================================
+// LEFT SECTION - SIGN IN FORM (White Background)
+// ============================================
+.signin-section {
+  flex: 1;
+  padding: 3rem 4rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 6;
+  border-radius: 24px 0 0 24px;
+}
+
+.signin-header {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 3;
+
+  h2 {
+    font-family: $font-display;
+    font-size: 2.4rem;
+    color: $secondary-blue;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .social-text {
+    font-family: $font-display;
+    font-size: 0.83rem;
+    color: #64748b;
+    margin-bottom: 0.9rem;
+  }
+}
+
+// ============================================
+// SOCIAL ICONS
+// ============================================
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  margin-bottom: 1.4rem;
+  position: relative;
+  z-index: 3;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #64748b;
+  text-decoration: none;
+  background: white;
+
+  i {
+    font-size: 1.15rem;
+  }
+
+  &:hover {
+    border-color: $primary-orange;
+    color: white;
+    background: linear-gradient(135deg, $primary-orange, $accent-light);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  }
+}
+
+// ============================================
+// FORM STYLES
+// ============================================
+.signin-form {
+  position: relative;
+  z-index: 3;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.input-wrapper {
+  position: relative;
+
+  i {
+    position: absolute;
+    left: 1.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $secondary-blue;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .password-toggle {
+    left: auto;
+    right: 1.15rem;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    pointer-events: auto;
+    z-index: 3;
+
+    &:hover {
+      color: $primary-orange;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 3.2rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: $font-body;
+    background: #ffffff;
+    color: #1e293b;
+    position: relative;
+    z-index: 2;
+
+    &::placeholder {
+      color: #94a3b8;
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-orange;
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+      background: #ffffff;
+      color: #1e293b;
+
+      ~ i {
+        color: $primary-orange;
+        transform: translateY(-50%) scale(1.1);
+      }
+    }
+
+    &.error {
+      border-color: #ef4444;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: #1e293b;
+      -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+}
+
+.error-message {
+  margin-top: 0.4rem;
+  font-size: 0.825rem;
+  color: #ef4444;
+  display: block;
+}
+
+// ============================================
+// FORM OPTIONS - Remember Me & Forgot Password
+// ============================================
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+// Custom Checkbox (Remember Me)
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-family: $font-display;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ .checkmark {
+      background: linear-gradient(135deg, $primary-orange, $accent-light);
+      border-color: $primary-orange;
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  .checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 5px;
+      top: 2px;
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover .checkmark {
+    border-color: $primary-orange;
+  }
+
+  .remember-text {
+    color: #64748b;
+    font-weight: 500;
+  }
+}
+
+// Forgot Password Link
+.forgot-password {
+  font-family: $font-display;
+  color: $secondary-blue;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: $primary-orange;
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: $primary-orange;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+// ============================================
+// SUBMIT BUTTON
+// ============================================
+.submit-btn {
+  width: 100%;
+  padding: 13px 22px;
+  background: linear-gradient(135deg, $primary-orange 0%, $accent-light 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 0.5rem;
+  font-family: $font-display;
+  box-shadow: 
+    0 6px 25px rgba(255, 107, 53, 0.5),
+    0 0 30px rgba(255, 107, 53, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  animation: buttonGlow 2s ease-in-out infinite;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, $accent-light 0%, $primary-orange 100%);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+      0 12px 35px rgba(255, 107, 53, 0.6),
+      0 0 50px rgba(255, 107, 53, 0.5);
+    animation: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    animation: none;
+  }
+
+  i {
+    font-size: 0.95rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:not(:disabled) i:not(.pi-spin) {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes buttonGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 6px 25px rgba(255, 107, 53, 0.5),
+      0 0 30px rgba(255, 107, 53, 0.3);
+  }
+  50% { 
+    box-shadow: 
+      0 8px 30px rgba(255, 107, 53, 0.7),
+      0 0 45px rgba(255, 107, 53, 0.5);
+  }
+}
+
+// ============================================
+// RIGHT SECTION - WELCOME MESSAGE (with University Image)
+// ============================================
+.signup-section {
+  flex: 1;
+  background: 
+    linear-gradient(135deg, rgba(0, 78, 137, 0.88) 0%, rgba(0, 90, 130, 0.92) 100%),
+    url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80');
+  // Replace with your university infrastructure image:
+  // url('/assets/images/university-library.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 3rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 6;
+  border-radius: 0 24px 24px 0;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.signup-section .content {
+  font-family: $font-display;
+  position: relative;
+  z-index: 3;
+}
+
+.signup-section h2 {
+  // font-family: $font-display;
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.signup-section p {
+
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  color: #ffffff;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.signup-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  padding: 0.9rem 3.2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: $font-display;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+
+  &:hover {
+    background: #ffffff;
+    color: $secondary-blue;
+    border-color: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// MOBILE SIGNUP LINK
+// ============================================
+.mobile-signup-link {
+  display: none;
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: #64748b;
+
+  a {
+    color: $secondary-blue;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $primary-orange;
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE DESIGN
+// ============================================
+
+// Tablet View (769px - 1024px)
+@media (max-width: 1024px) and (min-width: 769px) {
+  .auth-wrapper {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .auth-container {
+    flex-direction: column;
+    width: 95%;
+    max-width: 600px;
+    max-height: none;
+  }
+
+  .signup-section {
+    display: none;
+  }
+
+  .inner-card {
+    border-radius: 24px;
+    flex-direction: column;
+  }
+
+  .signin-section {
+    padding: 3rem 3rem;
+    border-radius: 24px;
+  }
+
+  .mobile-signup-link {
+    display: block;
+  }
+}
+
+// Mobile View (Below 768px)
+@media (max-width: 768px) {
+  .auth-wrapper {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+    padding: 1rem;
+  }
+
+  .auth-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .corner-box {
+    display: block;
+  }
+
+  .corner-box-tl {
+    width: 250px;
+    height: 150px;
+    top: -40px;
+    left: -100px;
+  }
+
+  .corner-box-br {
+    width: 200px;
+    height: 170px;
+    bottom: -40px;
+    right: -80px;
+  }
+
+  .signup-section {
+    display: none;
+  }
+
+  .inner-card {
+    border-radius: 24px;
+  }
+
+  .signin-section {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+  }
+
+  .signin-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .mobile-signup-link {
+    display: block;
+  }
+
+  .form-options {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .forgot-password {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-wrapper {
+    padding: 0.5rem;
+  }
+
+  .signin-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .signin-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .social-icons {
+    gap: 0.95rem;
+  }
+
+  .social-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .input-wrapper input {
+    padding: 0.95rem 2.8rem 0.95rem 3rem;
+    font-size: 0.9rem;
+  }
+
+  .input-wrapper i {
+    left: 0.95rem;
+    font-size: 0.95rem;
+  }
+
+  .input-wrapper .password-toggle {
+    right: 0.95rem;
+  }
+
+  .corner-box-tl {
+    width: 180px;
+    height: 120px;
+    top: -30px;
+    left: -60px;
+  }
+
+  .corner-box-br {
+    width: 150px;
+    height: 140px;
+    bottom: -30px;
+    right: -50px;
+  }
+}

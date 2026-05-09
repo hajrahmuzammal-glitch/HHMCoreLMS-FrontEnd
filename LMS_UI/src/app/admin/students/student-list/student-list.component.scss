@@ -1,0 +1,388 @@
+// Student List Component Styles
+
+.student-list-container {
+  animation: fadeIn 0.5s ease;
+}
+
+// =====================
+// PAGE HEADER
+// =====================
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .header-content {
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #004E89;
+      font-family: 'Poppins', sans-serif;
+      margin: 0 0 0.5rem 0;
+    }
+
+    p {
+      color: #6b7280;
+      margin: 0;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 640px) {
+      width: 100%;
+
+      button {
+        flex: 1;
+      }
+    }
+  }
+}
+
+// =====================
+// FILTER SECTION
+// =====================
+.filter-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .search-container {
+    margin-bottom: 1rem;
+
+    input {
+      height: 45px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      padding-left: 3rem;
+
+      &:focus {
+        border-color: #FF6B35;
+        box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+      }
+    }
+
+    .p-input-icon-left i {
+      color: #9ca3af;
+      left: 1rem;
+    }
+  }
+
+  .filters-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .filter-dropdown {
+      min-width: 250px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .bulk-actions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 210, 63, 0.1));
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+
+    .selection-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: #FF6B35;
+
+      i {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+// =====================
+// TABLE CONTAINER
+// =====================
+.table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  // Student ID Cell
+  .student-id {
+    font-weight: 600;
+    color: #004E89;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+  }
+
+  // Student Name Cell
+  .student-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF6B35, #FFD23F);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .name-info {
+      .full-name {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.25rem;
+      }
+
+      .enrollment-date {
+        font-size: 0.75rem;
+        color: #9ca3af;
+      }
+    }
+  }
+
+  // Contact Info Cell
+  .contact-info {
+    .email,
+    .phone {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+
+      i {
+        color: #6b7280;
+        font-size: 0.75rem;
+      }
+    }
+
+    .email {
+      color: #1f2937;
+    }
+
+    .phone {
+      color: #6b7280;
+    }
+  }
+
+  // Department Badge
+  .department-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 78, 137, 0.1);
+    color: #004E89;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    i {
+      font-size: 0.875rem;
+    }
+  }
+
+  // Semester Badge
+  .semester-badge {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    background: rgba(255, 210, 63, 0.2);
+    color: #d97706;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  // Action Buttons
+  .action-buttons {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+  }
+
+  // Empty State
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+
+    i {
+      font-size: 4rem;
+      color: #d1d5db;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: #1f2937;
+      margin: 0 0 0.5rem 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    p {
+      color: #6b7280;
+      margin: 0;
+    }
+  }
+
+  // Loading State
+  .loading-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    color: #6b7280;
+
+    i {
+      font-size: 1.5rem;
+      color: #FF6B35;
+    }
+  }
+}
+
+// =====================
+// CUSTOM PRIMENG TABLE STYLES
+// =====================
+::ng-deep {
+  .p-datatable {
+    .p-datatable-header {
+      background: transparent;
+      border: none;
+      padding: 0 0 1rem 0;
+    }
+
+    .p-datatable-thead > tr > th {
+      background: #f9fafb;
+      color: #1f2937;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1rem;
+      border: none;
+      border-bottom: 2px solid #e5e7eb;
+
+      &:first-child {
+        border-radius: 8px 0 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 8px 0 0;
+      }
+    }
+
+    .p-datatable-tbody > tr {
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 107, 53, 0.05) !important;
+      }
+
+      > td {
+        padding: 1rem;
+        border-bottom: 1px solid #f3f4f6;
+      }
+    }
+
+    .p-paginator {
+      background: transparent;
+      border: none;
+      padding: 1.5rem 0 0 0;
+      border-top: 1px solid #e5e7eb;
+
+      .p-paginator-pages .p-paginator-page {
+        &.p-highlight {
+          background: linear-gradient(135deg, #FF6B35, #FFD23F);
+          border-color: #FF6B35;
+          color: white;
+        }
+      }
+
+      .p-paginator-first,
+      .p-paginator-prev,
+      .p-paginator-next,
+      .p-paginator-last {
+        &:not(.p-disabled):hover {
+          background: rgba(255, 107, 53, 0.1);
+          border-color: #FF6B35;
+          color: #FF6B35;
+        }
+      }
+    }
+  }
+
+  .p-tag {
+    font-weight: 600;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8rem;
+    border-radius: 15px;
+  }
+
+  .p-dropdown {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    &:focus,
+    &.p-focus {
+      border-color: #FF6B35;
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+    }
+  }
+
+  .p-button-rounded {
+    width: 36px;
+    height: 36px;
+  }
+
+  .p-tooltip .p-tooltip-text {
+    background: #1f2937;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.875rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,119 @@
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <!-- Yellow Corner Boxes with Sci-Fi Random Pattern Animations (Top-Left & Bottom-Right) -->
+    <div class="corner-box corner-box-tl">
+      <div class="box-line line-1"></div>
+      <div class="box-line line-2"></div>
+      <div class="box-line line-3"></div>
+      <div class="box-line line-4"></div>
+      <div class="box-line line-5"></div>
+      <div class="box-line line-6"></div>
+    </div>
+    <div class="corner-box corner-box-br">
+      <div class="box-line line-1"></div>
+      <div class="box-line line-2"></div>
+      <div class="box-line line-3"></div>
+      <div class="box-line line-4"></div>
+      <div class="box-line line-5"></div>
+      <div class="box-line line-6"></div>
+    </div>
+
+    <div class="inner-card">
+      <!-- Left Section - Sign In Form -->
+      <div class="signin-section">
+        <div class="signin-header">
+          <h2>Welcome Back!</h2>
+          <p class="social-text">Sign in to continue your journey</p>
+        </div>
+
+        <div class="social-icons">
+          <a href="#" class="social-icon" (click)="socialLogin('facebook'); $event.preventDefault()" aria-label="Login with Facebook">
+            <i class="pi pi-facebook"></i>
+          </a>
+          <a href="#" class="social-icon" (click)="socialLogin('google'); $event.preventDefault()" aria-label="Login with Google">
+            <i class="pi pi-google"></i>
+          </a>
+          <a href="#" class="social-icon" (click)="socialLogin('linkedin'); $event.preventDefault()" aria-label="Login with LinkedIn">
+            <i class="pi pi-linkedin"></i>
+          </a>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signin-form">
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                formControlName="email"
+                [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+              >
+              <i class="pi pi-envelope"></i>
+            </div>
+            <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</span>
+              <span *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="Password" 
+                formControlName="password"
+                [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+              >
+              <i class="pi pi-lock"></i>
+              <i 
+                class="password-toggle pi" 
+                [class.pi-eye]="!showPassword" 
+                [class.pi-eye-slash]="showPassword"
+                (click)="togglePassword()"
+              ></i>
+            </div>
+            <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</span>
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+            </div>
+          </div>
+
+          <!-- Remember Me & Forgot Password Row -->
+          <div class="form-options">
+            <label class="remember-me" (click)="toggleRememberMe()">
+              <input 
+                type="checkbox" 
+                formControlName="rememberMe"
+                [checked]="rememberMe"
+              >
+              <span class="checkmark"></span>
+              <span class="remember-text">Remember Me</span>
+            </label>
+            <a class="forgot-password" (click)="navigateToForgotPassword()">
+              Forgot Password?
+            </a>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
+            <i class="pi pi-sign-in" *ngIf="!isLoading"></i>
+            <i class="pi pi-spinner pi-spin" *ngIf="isLoading"></i>
+            <span>{{ isLoading ? 'Signing In...' : 'Sign In' }}</span>
+          </button>
+        </form>
+
+        <div class="mobile-signup-link">
+          Don't have an account? <a (click)="navigateToRegister()">Sign Up</a>
+        </div>
+      </div>
+
+      <!-- Right Section - Welcome Message -->
+      <div class="signup-section">
+        <div class="image-overlay"></div>
+        <div class="content">
+          <h2>HELLO, FRIEND!</h2>
+          <p>Enter your personal details and start your <br>learning journey with us.</p>
+          <button class="signup-btn" (click)="navigateToRegister()">SIGN UP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

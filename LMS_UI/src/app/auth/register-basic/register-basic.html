@@ -1,0 +1,253 @@
+<div class="register-wrapper">
+  <!-- Animated Particle Canvas Background -->
+  <canvas #canvas class="particle-canvas"></canvas>
+
+  <!-- TOP LEFT LOGO -->
+  <a routerLink="/home" class="top-logo">
+    <div class="logo-icon">
+      <i class="pi pi-graduation-cap"></i>
+    </div>
+    <span class="logo-text">LMS</span>
+  </a>
+
+  <!-- Floating 3D Elements - 6 ICONS -->
+  <div class="floating-elements">
+    <div class="float-element element-1">
+      <i class="pi pi-book"></i>
+    </div>
+    <div class="float-element element-2">
+      <i class="pi pi-user-plus"></i>
+    </div>
+    <div class="float-element element-3">
+      <i class="pi pi-trophy"></i>
+    </div>
+    <div class="float-element element-4">
+      <i class="pi pi-users"></i>
+    </div>
+    <div class="float-element element-5">
+      <i class="pi pi-star"></i>
+    </div>
+    <div class="float-element element-6">
+      <i class="pi pi-briefcase"></i>
+    </div>
+  </div>
+
+  <!-- Main Register Container -->
+  <div class="register-container">
+    <!-- Glass Card -->
+    <div class="glass-card">
+      <!-- Card Content -->
+      <div class="card-content">
+        <!-- Title Section with Orange Heading -->
+        <div class="header-section">
+          <h1 class="title-main">CREATE ACCOUNT</h1>
+          <p class="title-sub">Join Our Educational Community</p>
+          <div class="title-line"></div>
+        </div>
+
+        <!-- Register Form -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+          <!-- Name Fields Row -->
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label class="form-label">
+                <i class="pi pi-user"></i>
+                <span>First Name</span>
+              </label>
+              <div class="input-wrapper">
+                <input 
+                  type="text" 
+                  formControlName="firstName"
+                  placeholder="John"
+                  class="form-input"
+                  [class.error]="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                >
+              </div>
+              @if (registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+                <div class="error-message">
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>Required</span>
+                </div>
+              }
+            </div>
+
+            <div class="form-group half-width">
+              <label class="form-label">
+                <i class="pi pi-user"></i>
+                <span>Last Name</span>
+              </label>
+              <div class="input-wrapper">
+                <input 
+                  type="text" 
+                  formControlName="lastName"
+                  placeholder="Doe"
+                  class="form-input"
+                  [class.error]="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+                >
+              </div>
+              @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+                <div class="error-message">
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>Required</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div class="form-group">
+            <label class="form-label">
+              <i class="pi pi-envelope"></i>
+              <span>Email Address</span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                formControlName="email"
+                placeholder="your.email@university.edu"
+                class="form-input"
+                [class.error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+              >
+            </div>
+            @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+              <div class="error-message">
+                <i class="pi pi-exclamation-circle"></i>
+                @if (registerForm.get('email')?.errors?.['required']) {
+                  <span>Email is required</span>
+                }
+                @if (registerForm.get('email')?.errors?.['email']) {
+                  <span>Please enter a valid email</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Password Input - SEPARATE ROW -->
+          <div class="form-group">
+            <label class="form-label">
+              <i class="pi pi-lock"></i>
+              <span>Password</span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                formControlName="password"
+                placeholder="Create password"
+                class="form-input"
+                [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+              >
+              <button 
+                type="button" 
+                class="password-toggle" 
+                (click)="togglePassword()"
+                tabindex="-1"
+              >
+                <i class="pi" [class.pi-eye]="!showPassword" [class.pi-eye-slash]="showPassword"></i>
+              </button>
+            </div>
+            @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+              <div class="error-message">
+                <i class="pi pi-exclamation-circle"></i>
+                @if (registerForm.get('password')?.errors?.['required']) {
+                  <span>Password is required</span>
+                }
+                @if (registerForm.get('password')?.errors?.['minlength']) {
+                  <span>Minimum 8 characters required</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Confirm Password Input - SEPARATE ROW -->
+          <div class="form-group">
+            <label class="form-label">
+              <i class="pi pi-lock"></i>
+              <span>Confirm Password</span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                [type]="showConfirmPassword ? 'text' : 'password'" 
+                formControlName="confirmPassword"
+                placeholder="Re-enter password"
+                class="form-input"
+                [class.error]="(registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch']) && registerForm.get('confirmPassword')?.touched"
+              >
+              <button 
+                type="button" 
+                class="password-toggle" 
+                (click)="toggleConfirmPassword()"
+                tabindex="-1"
+              >
+                <i class="pi" [class.pi-eye]="!showConfirmPassword" [class.pi-eye-slash]="showConfirmPassword"></i>
+              </button>
+            </div>
+            @if (registerForm.get('confirmPassword')?.touched && registerForm.errors?.['passwordMismatch']) {
+              <div class="error-message">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>Passwords don't match</span>
+              </div>
+            }
+          </div>
+
+          <!-- Terms Agreement -->
+          <div class="form-group">
+            <label class="terms-checkbox">
+              <input type="checkbox" formControlName="agreedToTerms">
+              <span class="checkmark">
+                <i class="pi pi-check"></i>
+              </span>
+              <span class="terms-text">
+                I agree to the <button type="button" class="terms-link">Terms of Service</button> and <button type="button" class="terms-link">Privacy Policy</button>
+              </span>
+            </label>
+            @if (registerForm.get('agreedToTerms')?.invalid && registerForm.get('agreedToTerms')?.touched) {
+              <div class="error-message">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>You must agree to continue</span>
+              </div>
+            }
+          </div>
+
+          <!-- Register Button - ALWAYS VISIBLE -->
+          <button type="submit" class="submit-button" [disabled]="registerForm.invalid || isLoading">
+            <span class="button-content">
+              @if (isLoading) {
+                <i class="pi pi-spinner pi-spin"></i>
+                <span>CREATING ACCOUNT...</span>
+              } @else {
+                <i class="pi pi-user-plus"></i>
+                <span>CREATE ACCOUNT</span>
+              }
+            </span>
+          </button>
+        </form>
+
+        <!-- Social Registration -->
+        <div class="social-section">
+          <span class="social-text">OR SIGN UP WITH</span>
+          <div class="social-icons">
+            <button type="button" class="social-icon" (click)="socialRegister('google')">
+              <i class="pi pi-google"></i>
+            </button>
+            <button type="button" class="social-icon" (click)="socialRegister('microsoft')">
+              <i class="pi pi-microsoft"></i>
+            </button>
+            <button type="button" class="social-icon" (click)="socialRegister('apple')">
+              <i class="pi pi-apple"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Login Link -->
+        <div class="login-section">
+          <p class="login-text">
+            Already have an account?
+            <button type="button" class="login-link" (click)="navigateToLogin()">
+              Sign In
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

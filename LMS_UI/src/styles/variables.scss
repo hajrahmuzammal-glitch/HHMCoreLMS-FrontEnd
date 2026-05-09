@@ -1,0 +1,332 @@
+// ══════════════════════variables════════════════════════════════════
+// THEME 1: MIDNIGHT SCHOLAR - COLOR SYSTEM
+// Modern SCSS with @use - No @import anywhere
+// ═══════════════════════════════════════════════════════════
+
+/* ──────────────────────────────────────────────────────────
+   PRIMARY COLORS (Main Brand Colors)
+   ────────────────────────────────────────────────────────── */
+
+// Primary: Prussian Blue - Trust, Intelligence, Stability
+$prussian-blue: #14213d;
+$primary: $prussian-blue;
+$primary-light: #1a2d52;
+$primary-dark: #0d1628;
+
+// Accent: Orange - Energy, Action, Call-to-Action
+$orange: #fca311;
+$accent: $orange;
+$accent-light: #fdb640;
+$accent-dark: #c98209;
+$accent-10: rgba(255, 140, 0, 0.1); 
+
+// Backgrounds
+$black: #000000;
+$bg-black: $black;
+$bg-dark: #0d1628;
+$white: #ffffff;
+$bg-white: $white;
+$grey: #e5e5e5;
+$bg-grey: $grey;
+
+// Blue Shades (Additional palette)
+$blue-900: #0d1628;
+$blue-800: #14213d;
+$blue-700: #1a2d52;
+$blue-600: #214167;
+$blue-500: #29557c;
+$blue-400: #4a7aa8;
+$blue-300: #6b9ec4;
+$blue-200: #8db8d8;
+$blue-100: #b0d1e8;
+
+// Yellow/Orange Shades
+$yellow-900: #995f08;
+$yellow-800: #c98209;
+$yellow-700: #fca311;
+$yellow-600: #fdb640;
+$yellow-500: #fdc86f;
+$yellow-400: #fdda9e;
+$yellow-300: #feebcd;
+$yellow-200: #fef5e7;
+$yellow-100: #fffbf3;
+
+
+/* ──────────────────────────────────────────────────────────
+   TRANSPARENT COLOR HELPERS
+   ────────────────────────────────────────────────────────── */
+
+// Prussian Blue Transparent Variants
+$prussian-blue-05: rgba($prussian-blue, 0.05);
+$prussian-blue-10: rgba($prussian-blue, 0.10);
+$prussian-blue-15: rgba($prussian-blue, 0.15);
+$prussian-blue-20: rgba($prussian-blue, 0.20);
+$prussian-blue-30: rgba($prussian-blue, 0.30);
+$prussian-blue-40: rgba($prussian-blue, 0.40);
+$prussian-blue-50: rgba($prussian-blue, 0.50);
+$prussian-blue-60: rgba($prussian-blue, 0.60);
+$prussian-blue-70: rgba($prussian-blue, 0.70);
+$prussian-blue-80: rgba($prussian-blue, 0.80);
+$prussian-blue-90: rgba($prussian-blue, 0.90);
+$prussian-blue-95: rgba($prussian-blue, 0.95);
+$prussian-blue-98: rgba($prussian-blue, 0.98);
+
+// Orange Transparent Variants
+$orange-05: rgba($orange, 0.05);
+$orange-10: rgba($orange, 0.10);
+$orange-15: rgba($orange, 0.15);
+$orange-20: rgba($orange, 0.20);
+$orange-30: rgba($orange, 0.30);
+$orange-40: rgba($orange, 0.40);
+$orange-50: rgba($orange, 0.50);
+$orange-60: rgba($orange, 0.60);
+$orange-70: rgba($orange, 0.70);
+$orange-80: rgba($orange, 0.80);
+$orange-90: rgba($orange, 0.90);
+
+// White Transparent Variants
+$white-05: rgba($white, 0.05);
+$white-10: rgba($white, 0.10);
+$white-15: rgba($white, 0.15);
+$white-20: rgba($white, 0.20);
+$white-30: rgba($white, 0.30);
+$white-40: rgba($white, 0.40);
+$white-50: rgba($white, 0.50);
+$white-60: rgba($white, 0.60);
+$white-70: rgba($white, 0.70);
+$white-80: rgba($white, 0.80);
+$white-85: rgba($white, 0.85);
+$white-90: rgba($white, 0.90);
+$white-95: rgba($white, 0.95);
+$white-98: rgba($white, 0.98);
+
+// Black Transparent Variants
+$black-05: rgba($black, 0.05);
+$black-10: rgba($black, 0.10);
+$black-15: rgba($black, 0.15);
+$black-20: rgba($black, 0.20);
+$black-30: rgba($black, 0.30);
+$black-40: rgba($black, 0.40);
+$black-50: rgba($black, 0.50);
+$black-60: rgba($black, 0.60);
+$black-70: rgba($black, 0.70);
+$black-80: rgba($black, 0.80);
+$black-90: rgba($black, 0.90);
+
+/* ──────────────────────────────────────────────────────────
+   TEXT COLORS (Semantic)
+   ────────────────────────────────────────────────────────── */
+
+$text-on-dark: $white;
+$text-on-dark-secondary: $white-85;
+$text-on-dark-muted: rgba($white, 0.65);
+
+$text-on-light: $bg-dark;
+$text-on-light-secondary: $prussian-blue;
+$text-on-light-muted: #666666;
+
+/* ──────────────────────────────────────────────────────────
+   UI ELEMENT COLORS
+   ────────────────────────────────────────────────────────── */
+
+$border-color: $grey;
+$border-color-dark: #cccccc;
+$border-color-on-dark: $white-15;
+
+$success: #10b981;
+$warning: $orange;
+$error: #ef4444;
+$info: #3b82f6;
+
+/* ──────────────────────────────────────────────────────────
+   SPACING SYSTEM (8px base unit)
+   ────────────────────────────────────────────────────────── */
+
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.25rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+$space-10: 2.5rem;
+$space-12: 3rem;
+$space-16: 4rem;
+$space-20: 5rem;
+$space-24: 6rem;
+
+/* ──────────────────────────────────────────────────────────
+   TYPOGRAPHY SYSTEM
+   ────────────────────────────────────────────────────────── */
+
+$font-heading: 'Poppins', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+$font-light: 300;
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extrabold: 800;
+
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-base: 1rem;
+$text-lg: 1.125rem;
+$text-xl: 1.25rem;
+$text-2xl: 1.5rem;
+$text-3xl: 1.875rem;
+$text-4xl: 2.25rem;
+$text-5xl: 3rem;
+$text-6xl: 3.75rem;
+$text-7xl: 4.5rem;
+
+$leading-tight: 1.25;
+$leading-snug: 1.375;
+$leading-normal: 1.5;
+$leading-relaxed: 1.625;
+$leading-loose: 2;
+
+/* ──────────────────────────────────────────────────────────
+   SHADOWS
+   ────────────────────────────────────────────────────────── */
+
+$shadow-sm: 0 1px 2px 0 rgba($black, 0.05);
+$shadow-base: 0 1px 3px 0 rgba($black, 0.1), 0 1px 2px -1px rgba($black, 0.1);
+$shadow-md: 0 4px 6px -1px rgba($black, 0.1), 0 2px 4px -2px rgba($black, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba($black, 0.1), 0 4px 6px -4px rgba($black, 0.1);
+$shadow-xl: 0 20px 25px -5px rgba($black, 0.1), 0 8px 10px -6px rgba($black, 0.1);
+$shadow-2xl: 0 25px 50px -12px rgba($black, 0.25);
+
+$shadow-accent: 0 10px 25px -5px $orange-40;
+$shadow-primary: 0 10px 25px -5px $prussian-blue-30;
+
+/* ──────────────────────────────────────────────────────────
+   BORDER RADIUS
+   ────────────────────────────────────────────────────────── */
+
+$radius-none: 0;
+$radius-sm: 0.25rem;
+$radius-base: 0.5rem;
+$radius-md: 0.75rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+$radius-2xl: 2rem;
+$radius-full: 9999px;
+
+/* ──────────────────────────────────────────────────────────
+   Z-INDEX LAYERS
+   ────────────────────────────────────────────────────────── */
+
+$z-base: 1;
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+/* ──────────────────────────────────────────────────────────
+   TRANSITIONS
+   ────────────────────────────────────────────────────────── */
+
+$transition-fast: 150ms ease-in-out;
+$transition-base: 300ms ease-in-out;
+$transition-slow: 500ms ease-in-out;
+$transition-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+/* ──────────────────────────────────────────────────────────
+   BREAKPOINTS (Mobile-First)
+   ────────────────────────────────────────────────────────── */
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+$breakpoint-3xl: 1920px;
+$breakpoint-xs: 480px;   // upper bound of mobile portrait
+/* ──────────────────────────────────────────────────────────
+   HEIGHT-SPECIFIC BREAKPOINTS (for short screens)
+   ────────────────────────────────────────────────────────── */
+
+$height-sm: 600px;   // Small height screens (netbooks)
+$height-md: 768px;   // Medium height screens (tablets landscape, small laptops)
+$height-lg: 900px;   // Standard laptop height
+$height-xl: 1080px;  // Full HD height
+$height-xs: 500px;       // very short screens (Nest Hub, landscape phones)
+/* ──────────────────────────────────────────────────────────
+   COMMON VIEWPORT COMBINATIONS
+   ────────────────────────────────────────────────────────── */
+
+// Small laptop/netbook: 1024x600
+$viewport-netbook-width: 1024px;
+$viewport-netbook-height: 600px;
+
+// Common laptop: 1280x800
+$viewport-laptop-sm-width: 1280px;
+$viewport-laptop-sm-height: 800px;
+
+// HD laptop: 1366x768
+$viewport-laptop-hd-width: 1366px;
+$viewport-laptop-hd-height: 768px;
+
+/* ──────────────────────────────────────────────────────────
+   CONTAINER WIDTHS
+   ────────────────────────────────────────────────────────── */
+
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1024px;
+$container-xl: 1280px;
+$container-2xl: 1536px;
+
+$container-padding-mobile: $space-4;
+$container-padding-tablet: $space-6;
+$container-padding-desktop: $space-12;
+$container-padding-wide: $space-20;
+
+/* ──────────────────────────────────────────────────────────
+   COMPONENT-SPECIFIC VARIABLES
+   ────────────────────────────────────────────────────────── */
+
+$navbar-height-mobile: 64px;
+$navbar-height-desktop: 80px;
+$navbar-bg-transparent: transparent;
+$navbar-bg-scrolled: $prussian-blue-95;
+$navbar-backdrop-blur: blur(10px);
+
+$hero-min-height-mobile: 500px;
+$hero-min-height-desktop: 1024px;
+$hero-min-height-wide: 1024px;
+
+$card-padding: $space-6;
+$card-padding-lg: $space-8;
+
+$button-padding-sm: $space-2 $space-4;
+$button-padding-base: $space-3 $space-6;
+$button-padding-lg: $space-4 $space-8;
+$button-height-sm: 36px;
+$button-height-base: 44px;
+$button-height-lg: 56px;
+
+/* ──────────────────────────────────────────────────────────
+   ACCESSIBILITY (WCAG 2.1)
+   ────────────────────────────────────────────────────────── */
+
+$focus-outline-width: 3px;
+$focus-outline-color: $accent;
+$focus-outline-offset: 2px;
+$min-touch-target: 44px;
+
+/* ──────────────────────────────────────────────────────────
+   ANIMATION PRESETS
+   ────────────────────────────────────────────────────────── */
+
+$fade-in-duration: 0.6s;
+$fade-in-delay: 0.1s;
+$slide-in-duration: 0.8s;
+$slide-in-distance: 30px;
+$bounce-duration: 1s;
+$bounce-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55);

@@ -1,0 +1,222 @@
+<div class="courses-page">
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="page-title">Explore Our Courses</h1>
+        <p class="page-subtitle">
+          Discover thousands of courses taught by expert instructors. Learn new skills and advance your career.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="courses-content">
+    <div class="container">
+      <div class="content-wrapper">
+        
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+          <div class="sidebar-header">
+            <h3>Filter Courses</h3>
+            <button class="btn-clear" (click)="clearFilters()">
+              <i class="pi pi-times"></i>
+              Clear All
+            </button>
+          </div>
+
+          <!-- Search -->
+          <div class="filter-group">
+            <label class="filter-label">
+              <i class="pi pi-search"></i>
+              Search
+            </label>
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-search"></i>
+              <input 
+                type="text" 
+                pInputText 
+                [(ngModel)]="filters.search"
+                (ngModelChange)="applyFilters()"
+                placeholder="Search courses..."
+                class="w-full" />
+            </span>
+          </div>
+
+          <!-- Category -->
+          <div class="filter-group">
+            <label class="filter-label">
+              <i class="pi pi-th-large"></i>
+              Category
+            </label>
+            <p-select
+              [options]="categories"
+              [(ngModel)]="filters.category"
+              (ngModelChange)="applyFilters()"
+              optionLabel="label"
+              optionValue="value"
+              [style]="{'width':'100%'}"
+              placeholder="Select Category">
+            </p-select>
+          </div>
+
+          <!-- Level -->
+          <div class="filter-group">
+            <label class="filter-label">
+              <i class="pi pi-chart-line"></i>
+              Level
+            </label>
+            <p-select
+              [options]="levels"
+              [(ngModel)]="filters.level"
+              (ngModelChange)="applyFilters()"
+              optionLabel="label"
+              optionValue="value"
+              [style]="{'width':'100%'}"
+              placeholder="Select Level">
+            </p-select>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-group">
+            <label class="filter-label">
+              <i class="pi pi-dollar"></i>
+              Price Range
+            </label>
+            <div class="price-range">
+              <p-slider 
+                [(ngModel)]="filters.priceRange" 
+                [range]="true"
+                [min]="0"
+                [max]="100"
+                (ngModelChange)="applyFilters()"
+                [style]="{'width':'100%'}">
+              </p-slider>
+              <div class="price-values">
+                <span>${{filters.priceRange[0]}}</span>
+                <span>${{filters.priceRange[1]}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popular Categories -->
+          <div class="popular-categories">
+            <h4>Popular Topics</h4>
+            <div class="category-tags">
+              <button class="category-tag" (click)="filters.category = 'Development'; applyFilters()">
+                <i class="pi pi-code"></i>
+                Development
+              </button>
+              <button class="category-tag" (click)="filters.category = 'Design'; applyFilters()">
+                <i class="pi pi-palette"></i>
+                Design
+              </button>
+              <button class="category-tag" (click)="filters.category = 'Business'; applyFilters()">
+                <i class="pi pi-briefcase"></i>
+                Business
+              </button>
+              <button class="category-tag" (click)="filters.category = 'Marketing'; applyFilters()">
+                <i class="pi pi-megaphone"></i>
+                Marketing
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Courses Grid -->
+        <main class="courses-main">
+          
+          <!-- Top Bar -->
+          <div class="courses-topbar">
+            <div class="results-info">
+              <h2>{{ filteredCourses.length }} Courses Found</h2>
+              <p>Showing all available courses</p>
+            </div>
+            <div class="sort-control">
+              <label>Sort by:</label>
+              <p-select
+                [options]="sortOptions"
+                [(ngModel)]="filters.sortBy"
+                (ngModelChange)="applyFilters()"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="Sort by">
+              </p-select>
+            </div>
+          </div>
+
+          <!-- Courses Grid -->
+          <div class="courses-grid" *ngIf="filteredCourses.length > 0">
+            <div class="course-card" *ngFor="let course of filteredCourses">
+              <div class="course-image">
+                <img [src]="course.image" [alt]="course.title" loading="lazy">
+                <span class="course-badge">{{ course.level }}</span>
+                <div class="course-overlay">
+                  <button class="btn btn-light" [routerLink]="['/course', course.id]">
+                    <i class="pi pi-eye"></i>
+                    View Details
+                  </button>
+                </div>
+              </div>
+              
+              <div class="course-content">
+                <span class="course-category">{{ course.category }}</span>
+                <h3 class="course-title">
+                  <a [routerLink]="['/course', course.id]">{{ course.title }}</a>
+                </h3>
+                <p class="course-description">{{ course.description }}</p>
+                
+                <div class="course-instructor">
+                  <i class="pi pi-user"></i>
+                  <span>{{ course.instructor }}</span>
+                </div>
+
+                <div class="course-stats">
+                  <div class="stat">
+                    <i class="pi pi-play-circle"></i>
+                    <span>{{ course.lessons }} lessons</span>
+                  </div>
+                  <div class="stat">
+                    <i class="pi pi-clock"></i>
+                    <span>{{ course.duration }}</span>
+                  </div>
+                </div>
+
+                <div class="course-meta">
+                  <div class="course-rating">
+                    <i class="pi pi-star-fill"></i>
+                    <span>{{ course.rating }}</span>
+                    <span class="students-count">({{ course.students }} students)</span>
+                  </div>
+                </div>
+
+                <div class="course-footer">
+                  <div class="course-price">
+                    <span class="price">${{ course.price }}</span>
+                  </div>
+                  <button class="btn btn-primary" [routerLink]="['/course', course.id]">
+                    Enroll Now
+                    <i class="pi pi-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- No Results -->
+          <div class="no-results" *ngIf="filteredCourses.length === 0">
+            <i class="pi pi-inbox"></i>
+            <h3>No Courses Found</h3>
+            <p>Try adjusting your filters to find more courses</p>
+            <button class="btn btn-primary" (click)="clearFilters()">
+              <i class="pi pi-refresh"></i>
+              Clear Filters
+            </button>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+</div>

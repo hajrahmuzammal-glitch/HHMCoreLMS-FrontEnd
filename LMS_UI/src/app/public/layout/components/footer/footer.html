@@ -1,0 +1,150 @@
+<footer class="footer">
+  
+  <!-- Decorative Top Border -->
+  <div class="footer__top-border"></div>
+
+  <div class="footer__container">
+    
+    <!-- Main Footer Content -->
+    <div class="footer__content">
+      
+      <!-- Company Info Column -->
+      <div class="footer__col footer__col--about">
+        <div class="footer__logo">
+          <div class="footer__logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7V17C2 18.1 2.9 19 4 19H20C21.1 19 22 18.1 22 17V7L12 2Z" fill="currentColor"/>
+              <path d="M12 22L2 17V7L12 12L22 7V17L12 22Z" fill="currentColor" opacity="0.6"/>
+            </svg>
+          </div>
+          <span class="footer__logo-text">
+            <span class="text-primary">Edu</span><span class="text-accent">Hub</span>
+          </span>
+        </div>
+        
+        <p class="footer__description">
+          Empowering learners worldwide with cutting-edge education technology. 
+          Transform your future with expert-led courses and personalized learning paths.
+        </p>
+
+        <!-- Social Links -->
+        <div class="footer__social">
+          <a 
+            *ngFor="let social of socialLinks"
+            [href]="social.url" 
+            class="footer__social-link"
+            [attr.aria-label]="social.label"
+            target="_blank"
+            rel="noopener noreferrer">
+            <i class="pi" [ngClass]="social.icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links Column -->
+      <div class="footer__col">
+        <h3 class="footer__title">Quick Links</h3>
+        <ul class="footer__links">
+          <li *ngFor="let link of quickLinks">
+            <a [routerLink]="link.route" class="footer__link">
+              <i class="pi pi-chevron-right"></i>
+              <span>{{ link.label }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Support Column -->
+      <div class="footer__col">
+        <h3 class="footer__title">Support</h3>
+        <ul class="footer__links">
+          <li *ngFor="let link of supportLinks">
+            <a [routerLink]="link.route" class="footer__link">
+              <i class="pi pi-chevron-right"></i>
+              <span>{{ link.label }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Info Column -->
+      <div class="footer__col">
+        <h3 class="footer__title">Contact Info</h3>
+        <ul class="footer__contact">
+          <li>
+            <i class="pi pi-map-marker"></i>
+            <span>123 Education Street<br>Learning City, ED 12345</span>
+          </li>
+          <li>
+            <i class="pi pi-phone"></i>
+            <span>+1 (234) 567-8900</span>
+          </li>
+          <li>
+            <i class="pi pi-envelope"></i>
+            <span>info@eduhub.com</span>
+          </li>
+          <li>
+            <i class="pi pi-clock"></i>
+            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="footer__newsletter">
+      <div class="footer__newsletter-content">
+        <div class="footer__newsletter-text">
+          <h3 class="footer__newsletter-title">Stay Updated</h3>
+          <p class="footer__newsletter-description">
+            Subscribe to our newsletter for the latest courses and exclusive offers.
+          </p>
+        </div>
+        <form class="footer__newsletter-form">
+          <input 
+            type="email" 
+            placeholder="Enter your email" 
+            class="footer__newsletter-input"
+            aria-label="Email for newsletter">
+          <button type="submit" class="footer__newsletter-button">
+            <span>Subscribe</span>
+            <i class="pi pi-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="footer__bottom-content">
+        <p class="footer__copyright">
+          &copy; {{ currentYear }} EduHub. All rights reserved.
+        </p>
+        <div class="footer__bottom-links">
+          <a routerLink="/terms" class="footer__bottom-link">Terms</a>
+          <span class="footer__separator">|</span>
+          <a routerLink="/privacy" class="footer__bottom-link">Privacy</a>
+          <span class="footer__separator">|</span>
+          <a routerLink="/cookies" class="footer__bottom-link">Cookies</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button 
+    class="footer__scroll-top" 
+    (click)="scrollToTop()"
+    aria-label="Scroll to top">
+    <i class="pi pi-arrow-up"></i>
+  </button>
+
+  <!-- Background Decoration -->
+  <div class="footer__decoration">
+    <div class="footer__decoration-circle footer__decoration-circle--1"></div>
+    <div class="footer__decoration-circle footer__decoration-circle--2"></div>
+  </div>
+
+</footer>

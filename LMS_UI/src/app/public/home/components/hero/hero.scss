@@ -1,0 +1,632 @@
+// ══════════════════════════hero section scss═════════════════════════════════
+// HERO SECTION
+// ═══════════════════════════════════════════════════════════
+
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; // Always full viewport on mobile
+  max-height: 100dvh; // Prevents overflow
+  margin-top: 0; // No gap for fixed navbar
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: v.$text-on-dark;
+
+  // Tablet and up - maintain full viewport
+  @include m.respond-to('md') {
+    min-height: 100vh;
+  }
+
+  // Desktop - maintain full viewport
+  @include m.respond-to('xl') {
+    min-height: 100vh;
+  }
+
+  // ✅ LAPTOP-SPECIFIC FIXES (short screens with wide width)
+  // These ONLY apply to problematic laptop screens
+  // They don't affect mobile, tablet, or desktop (1440x1080+)
+  
+  // For 1366x768 and similar
+  @include m.viewport-laptop-hd {
+    min-height: 100vh;
+    max-height: 100vh;
+    padding-top: 60px; // ✅ NEW: Add top padding to push content down
+    padding-bottom: 60px; // ✅ NEW: Add bottom padding for balance
+  }
+  
+  // For 1280x800 and similar
+  @include m.viewport-laptop-sm {
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+  
+  // For 1024x600 (netbooks)
+  @include m.viewport-netbook {
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+.hero__backgrounds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero__background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1s ease-in-out, transform 8s ease-out;
+
+  &.active {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 27, 62, 0.7);
+  z-index: 1;
+}
+
+.hero__container {
+  width: 100%;
+  max-width: v.$container-xl;
+  margin: 0 auto;
+  padding: 0 v.$container-padding-mobile;
+  text-align: center;
+  z-index: 10;
+  position: relative;
+
+  @include m.respond-to('md') {
+    padding: 0 v.$container-padding-tablet;
+  }
+
+  @include m.respond-to('xl') {
+    padding: 0 v.$container-padding-desktop;
+  }
+}
+
+.hero__content {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero__title {
+  font-family: v.$font-heading;
+  font-size: v.$text-2xl; // ✅ REDUCED: Mobile from 1.875rem to 1.5rem (24px)
+  font-weight: v.$font-extrabold;
+  line-height: v.$leading-tight;
+  color: v.$text-on-dark;
+  margin-bottom: v.$space-3; // ✅ REDUCED: Mobile from 1rem to 0.75rem
+  text-shadow: 0 2px 4px v.$black-30;
+  
+  background: linear-gradient(
+    135deg,
+    v.$white 0%,
+    v.$white-90 50%,
+    v.$yellow-100 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  // Small mobile (640px+)
+  @include m.respond-to('sm') {
+    font-size: v.$text-3xl; // 1.875rem (30px)
+    // margin-bottom: v.$space-4;
+  }
+
+  // Tablet (768px+)
+  @include m.respond-to('md') {
+    font-size: v.$text-4xl; // 2.25rem (36px)
+    // margin-bottom: v.$space-5;
+  }
+
+  // Desktop (1280px+)
+  @include m.respond-to('xl') {
+    font-size: v.$text-6xl; // 3.75rem (60px) - ORIGINAL SIZE
+    // margin-bottom: v.$space-6;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  // For 1366x768 specifically
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    font-size: v.$text-5xl; // 3rem (48px) - slightly smaller for short laptops
+    // margin-bottom: v.$space-5;
+  }
+  
+  @media (min-width: 1024px) and (max-height: 600px) {
+    font-size: v.$text-4xl; // 2.25rem (36px) - smaller for very short screens
+    // margin-bottom: v.$space-4;
+  }
+
+  // Fallback for browsers that don't support background-clip
+  @supports not (-webkit-background-clip: text) {
+    color: v.$white;
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+}
+
+.hero__subtitle {
+  font-family: v.$font-body;
+  font-size: v.$text-base; // ✅ REDUCED: Mobile from 1.125rem to 1rem (16px)
+  font-weight: v.$font-regular;
+  line-height: v.$leading-relaxed;
+  color: v.$text-on-dark-secondary;
+  margin-bottom: v.$space-6; // ✅ REDUCED: Mobile from 2rem to 1.5rem
+  text-shadow: 0 1px 2px v.$black-50;
+
+  // Small mobile (640px+)
+  @include m.respond-to('sm') {
+    font-size: v.$text-lg; // 1.125rem (18px)
+    margin-bottom: v.$space-6;
+  }
+
+  // Tablet (768px+)
+  @include m.respond-to('md') {
+    font-size: v.$text-xl; // 1.25rem (20px)
+    margin-bottom: v.$space-8;
+  }
+
+  // Desktop (1024px+)
+  @include m.respond-to('lg') {
+    font-size: v.$text-2xl; // 1.5rem (24px) - ORIGINAL SIZE
+    margin-bottom: v.$space-10;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    font-size: v.$text-xl; // 1.25rem (20px)
+    margin-bottom: v.$space-6;
+  }
+  
+  @media (min-width: 1024px) and (max-height: 600px) {
+    font-size: v.$text-lg; // 1.125rem (18px)
+    margin-bottom: v.$space-5;
+  }
+}
+
+.hero__search {
+  max-width: 600px;
+  margin: 0 auto v.$space-6; // ✅ REDUCED: Mobile from 2rem to 1.5rem
+
+  @include m.respond-to('md') {
+    margin-bottom: v.$space-8; // Tablet
+  }
+
+  @include m.respond-to('lg') {
+    margin-bottom: v.$space-10; // Desktop
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    margin-bottom: v.$space-6;
+    max-width: 550px; // ✅ NEW: Slightly narrower for balance
+  }
+}
+
+.search-form__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: v.$white-10;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid v.$white-20;
+  border-radius: v.$radius-full;
+  padding: v.$space-2; // Mobile: 0.5rem
+  margin-bottom: v.$space-5; // ✅ REDUCED: Mobile from 1.5rem to 1.25rem
+  box-shadow: 
+    0 8px 32px v.$prussian-blue-20,
+    0 4px 16px v.$black-10,
+    inset 0 1px 0 v.$white-10;
+  transition: all v.$transition-base;
+
+  &:hover {
+    border-color: v.$white-30;
+    box-shadow: 
+      0 12px 40px v.$prussian-blue-30,
+      0 6px 20px v.$black-15,
+      inset 0 1px 0 v.$white-15;
+  }
+
+  &:focus-within {
+    border-color: v.$orange;
+    box-shadow: 
+      0 0 0 3px v.$orange-20,
+      0 12px 40px v.$orange-30,
+      0 6px 20px v.$black-15,
+      inset 0 1px 0 v.$white-15;
+  }
+
+  @include m.respond-to('md') {
+    margin-bottom: v.$space-6;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    margin-bottom: v.$space-5;
+  }
+}
+
+.search-form__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: v.$space-2 v.$space-4; // ✅ REDUCED: Mobile from 0.75rem 1.25rem to 0.5rem 1rem
+  font-family: v.$font-body;
+  font-size: v.$text-sm; // ✅ REDUCED: Mobile from 1rem to 0.875rem (14px)
+  font-weight: v.$font-medium;
+  color: v.$white;
+
+  &::placeholder {
+    color: v.$text-on-dark-muted;
+    transition: color v.$transition-base;
+  }
+
+  &:focus::placeholder {
+    color: v.$white-50;
+  }
+
+  // Small mobile (640px+)
+  @include m.respond-to('sm') {
+    padding: v.$space-3 v.$space-5;
+    font-size: v.$text-base; // 1rem
+  }
+
+  // Tablet and up - ORIGINAL SIZE
+  @include m.respond-to('md') {
+    padding: v.$space-4 v.$space-6; // 1rem 1.5rem
+    font-size: v.$text-lg; // 1.125rem (18px)
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    padding: v.$space-3 v.$space-5;
+    font-size: v.$text-base;
+  }
+}
+
+.search-form__button {
+  background: linear-gradient(135deg, v.$orange 0%, v.$accent-light 100%);
+  border: none;
+  border-radius: v.$radius-full;
+  width: 40px; // ✅ REDUCED: Mobile from 48px to 40px
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all v.$transition-base;
+  flex-shrink: 0; // ✅ NEW: Prevent button from shrinking
+
+  &:hover {
+    background: linear-gradient(135deg, v.$accent-light 0%, v.$orange 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px v.$orange-40;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  // Small mobile (640px+)
+  @include m.respond-to('sm') {
+    width: 44px;
+    height: 44px;
+  }
+
+  // Tablet and desktop - ORIGINAL SIZE
+  @include m.respond-to('md') {
+    width: 56px;
+    height: 56px;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.search-form__icon {
+  width: 18px; // ✅ REDUCED: Mobile from 20px to 18px
+  height: 18px;
+  color: v.$white;
+
+  // Small mobile (640px+)
+  @include m.respond-to('sm') {
+    width: 20px;
+    height: 20px;
+  }
+
+  // Tablet and desktop - ORIGINAL SIZE
+  @include m.respond-to('md') {
+    width: 24px;
+    height: 24px;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.hero__actions {
+  display: flex;
+  gap: v.$space-3; // ✅ REDUCED: Mobile from 1rem to 0.75rem
+  justify-content: center;
+  flex-wrap: nowrap; // ✅ CHANGED: Force buttons to stay in one row on mobile
+  align-items: center; // ✅ NEW: Vertically align buttons
+
+  @include m.respond-to('sm') {
+    gap: v.$space-4; // Small mobile: 1rem
+  }
+
+  @include m.respond-to('md') {
+    gap: v.$space-6; // Tablet: 1.5rem - ORIGINAL
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+    gap: v.$space-5;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: v.$font-body;
+  font-weight: v.$font-semibold;
+  text-decoration: none;
+  border-radius: v.$radius-lg;
+  transition: all v.$transition-base;
+  cursor: pointer;
+  border: 2px solid transparent;
+
+  &--large {
+    padding: v.$space-2 v.$space-5; // ✅ REDUCED: Mobile from 1rem 2rem to 0.5rem 1.25rem
+    font-size: v.$text-sm; // ✅ REDUCED: Mobile from 1rem to 0.875rem (14px)
+    white-space: nowrap; // ✅ NEW: Prevent text wrapping
+
+    // Small mobile (640px+)
+    @include m.respond-to('sm') {
+      padding: v.$space-3 v.$space-6; // 0.75rem 1.5rem
+      font-size: v.$text-base; // 1rem
+    }
+
+    // Tablet and desktop - ORIGINAL SIZE
+    @include m.respond-to('md') {
+      padding: v.$space-4 v.$space-10; // 1rem 2.5rem
+      font-size: v.$text-lg; // 1.125rem
+    }
+
+    // ✅ LAPTOP ADJUSTMENTS (short screens only)
+    @media (min-width: v.$breakpoint-lg) and (max-height: 768px) {
+      padding: v.$space-3 v.$space-8;
+      font-size: v.$text-base;
+    }
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, v.$orange 0%, v.$accent-light 100%);
+    color: v.$white;
+
+    &:hover {
+      background: linear-gradient(135deg, v.$accent-light 0%, v.$orange 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px v.$orange-40;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    border-color: v.$white-30;
+    color: v.$white;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      border-color: v.$orange;
+      background: v.$orange-10;
+      color: v.$white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px v.$white-20;
+    }
+  }
+}
+
+.hero__pagination {
+  position: absolute;
+  bottom: v.$space-6; // ✅ REDUCED: Mobile from 2rem to 1.5rem
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  @include m.respond-to('md') {
+    bottom: v.$space-8;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (max-height: 768px) {
+    bottom: v.$space-5; // ✅ INCREASED: From 1rem to 1.25rem for better balance
+  }
+}
+
+.hero__dots {
+  display: flex;
+  gap: v.$space-2; // ✅ REDUCED: Mobile from 0.75rem to 0.5rem
+  align-items: center;
+  justify-content: center;
+
+  @include m.respond-to('md') {
+    gap: v.$space-3;
+  }
+}
+
+.hero__dot {
+  width: 10px; // ✅ REDUCED: Mobile from 12px to 10px
+  height: 10px;
+  border-radius: v.$radius-full;
+  border: none;
+  background: v.$white-30;
+  cursor: pointer;
+  transition: all v.$transition-base;
+  box-shadow: 0 2px 8px v.$black-20;
+
+  &:hover {
+    background: v.$white-50;
+    transform: scale(1.1);
+  }
+
+  &.active {
+    background: v.$orange;
+    box-shadow: 
+      0 2px 8px v.$orange-50,
+      0 0 0 2px v.$white-20;
+  }
+
+  @include m.respond-to('sm') {
+    width: 12px;
+    height: 12px;
+  }
+
+  // Tablet and desktop - ORIGINAL SIZE
+  @include m.respond-to('md') {
+    width: 14px;
+    height: 14px;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS (short screens only)
+  @media (max-height: 768px) {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: v.$white-10;
+  backdrop-filter: blur(20px);
+  border: 1px solid v.$white-20;
+  border-radius: v.$radius-full;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all v.$transition-base;
+  z-index: 15;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: v.$white;
+  }
+
+  &:hover {
+    background: v.$white-20;
+    border-color: v.$orange;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 
+      0 0 25px rgba(255, 140, 0, 0.9),
+      0 0 50px rgba(255, 140, 0, 0.7),
+      0 0 80px rgba(255, 140, 0, 0.5),
+      0 8px 35px rgba(255, 140, 0, 0.6);
+    
+    svg {
+      color: v.$orange;
+      filter: drop-shadow(0 0 18px rgba(255, 140, 0, 1));
+    }
+  }
+
+  &--prev {
+    left: v.$space-6;
+  }
+
+  &--next {
+    right: v.$space-6;
+  }
+
+  // Hide on tablet and mobile (below 1024px)
+  @include m.respond-to-max('md') {
+    display: none;
+  }
+
+  // ✅ LAPTOP ADJUSTMENTS - hide on very short screens
+  @media (max-height: 600px) {
+    display: none;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__background-img {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+
+  .hero__content {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.1s !important;
+  }
+}
+
+.hero__dot:focus,
+.hero__arrow:focus,
+.search-form__button:focus {
+  outline: v.$focus-outline-width solid v.$focus-outline-color;
+  outline-offset: v.$focus-outline-offset;
+}
+
+.search-form__input:focus {
+  outline: none;
+}

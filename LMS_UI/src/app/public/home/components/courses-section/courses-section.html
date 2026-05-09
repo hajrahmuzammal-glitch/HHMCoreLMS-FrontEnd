@@ -1,0 +1,150 @@
+<section class="courses-section" aria-label="Courses">
+
+  <!-- Decorative background -->
+  <div class="orb orb--1" aria-hidden="true"></div>
+  <div class="orb orb--2" aria-hidden="true"></div>
+  <div class="geo-hex"     aria-hidden="true"></div>
+  <div class="geo-diamond" aria-hidden="true"></div>
+  <div class="geo-topline" aria-hidden="true"></div>
+
+  <div class="cs-container">
+
+    <!-- Header -->
+    <header class="cs-header">
+      <h2 class="cs-title">
+        Expand Your <span class="highlight">Knowledge</span><br />
+        with Expert-Led Courses
+      </h2>
+      <p class="cs-subtitle">
+        Unlock your potential with industry-vetted content. Learn at your own pace,
+        earn certificates, and transform your career.
+      </p>
+    </header>
+
+    <!-- Filter Tabs -->
+    <nav class="cs-filter" aria-label="Course category filters">
+      <button
+        *ngFor="let tab of tabs"
+        class="filter-btn"
+        [class.is-active]="isActiveFilter(tab.value)"
+        [attr.aria-selected]="isActiveFilter(tab.value)"
+        (click)="setFilter(tab.value)"
+      >
+        {{ tab.label }}
+      </button>
+    </nav>
+
+    <!-- Grid -->
+    <div class="cs-grid">
+      <article
+        *ngFor="let course of filteredCourses(); trackBy: trackById"
+        #courseCard
+        class="course-card"
+        [class.course-card--featured]="course.isFeatured"
+        [attr.tabindex]="0"
+        [attr.aria-label]="course.title"
+        (keydown)="onCardKeydown($event, course)"
+      >
+        <div class="accent-bar"></div>
+
+        <!-- ─── Thumbnail ─────────────────────────────────── -->
+        <div class="card-thumb">
+
+          <!-- Real photo as background -->
+          <img
+            class="card-thumb-img"
+            [src]="course.imageUrl"
+            [alt]="course.imageAlt"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <!-- Gradient overlay for badge legibility -->
+          <div class="thumb-overlay" aria-hidden="true"></div>
+
+          <!-- Badge only — no icon-wrap -->
+          <div class="badge-wrap">
+            <span class="badge" [ngClass]="course.badgeClass">{{ course.badge }}</span>
+          </div>
+
+        </div>
+
+        <!-- ─── Body ──────────────────────────────────────── -->
+        <div class="card-body">
+          <div class="card-category">{{ course.categoryLabel }}</div>
+          <h3 class="card-title">{{ course.title }}</h3>
+          <p class="card-desc">{{ course.description }}</p>
+
+          <!-- Instructor -->
+          <div class="card-instructor">
+            <div class="avatar-placeholder" [ngClass]="course.avatarClass">
+              {{ course.instructorInitials }}
+            </div>
+            <span class="instructor-name">{{ course.instructor }}</span>
+          </div>
+
+          <!-- Stats -->
+          <div class="card-stats">
+            <div class="card-stat">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-.5 13.5v-7l5.25 3.5-5.25 3.5z"/>
+              </svg>
+              {{ course.lessons }} lessons
+            </div>
+            <div class="card-stat">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 13H11V7h2v8z"/>
+              </svg>
+              {{ course.duration }}
+            </div>
+            <div class="card-stat">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+              </svg>
+              {{ course.enrolled }} enrolled
+            </div>
+            <div class="card-rating" [attr.aria-label]="'Rating: ' + course.ratingLabel + ' out of 5'">
+              <span
+                *ngFor="let filled of getStars(course.rating)"
+                class="star"
+                [class.on]="filled"
+                aria-hidden="true"
+              >★</span>
+              <span class="rating-num">{{ course.ratingLabel }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Footer ────────────────────────────────────── -->
+        <div class="card-footer">
+          <div class="price-wrap">
+            <span class="price" [class.price--free]="course.isFree">{{ course.price }}</span>
+            <span *ngIf="course.originalPrice" class="price-original">{{ course.originalPrice }}</span>
+          </div>
+          <button
+            class="cta-btn"
+            [attr.aria-label]="(course.isFree ? 'Start' : 'Enroll in') + ' ' + course.title"
+            (click)="onEnroll(course)"
+          >
+            {{ course.isFree ? 'Start Now' : 'Enroll' }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+
+      </article>
+    </div><!-- /cs-grid -->
+
+    <!-- Browse All CTA -->
+    <div class="cs-cta-wrap">
+      <button class="section-cta" (click)="onBrowseAll()">
+        Browse All Courses
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,85 @@
+// ===homepage scss===//
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+
+.homepage {
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+.hero-layer {
+  position: relative;
+  z-index: 20;
+
+  // This shadow is what sells the effect —
+  // makes the hero look like a physical page hovering above the features
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+// ─────────────────────────────────────────────────────────
+// FEATURES LAYER — sits beneath hero
+// z-index: 10 keeps features below hero in stacking context
+// No margin, no gap — features starts exactly where hero ends in DOM
+// ─────────────────────────────────────────────────────────
+
+.features-layer {
+  position: relative;
+  z-index: 10;
+
+  // Slight shadow from above: as hero slides off screen,
+  // features appears to "emerge" from underneath
+  // This matches the UT Austin visual — features feels like
+  // it was always there, just hidden under the hero page
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 4px;
+
+    // Top edge shadow: subtle line where hero was sitting
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.06) 0%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+  .hero-component {
+   flex: 0 0 auto;
+  min-height: 100vh;
+  
+  @media (max-height: 768px) {
+    min-height: 100vh;
+    max-height: 100vh;
+   }
+  }
+
+  .trust-section {
+    flex: 1; // Takes up all remaining space
+  }
+  // // Spacing between sections
+  // > * {
+  //   margin-bottom: $space-16; // 64px on mobile
+    
+  //   @include respond-to('md') {
+  //     margin-bottom: $space-20; // 80px on tablet
+  //   }
+    
+  //   @include respond-to('xl') {
+  //     margin-bottom: $space-24; // 96px on desktop
+  //   }
+  // }
+
+  // Remove margin from last section
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}

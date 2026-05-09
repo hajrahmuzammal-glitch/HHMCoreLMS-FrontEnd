@@ -1,0 +1,664 @@
+// ═══════════════════════════════════════════════════════════
+// PREMIUM DASHBOARD - MODERN CARD-BASED DESIGN
+// ═══════════════════════════════════════════════════════════
+
+.dashboard {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+// ────────────────────────────────────────────────────────────
+// PAGE HEADER
+// ────────────────────────────────────────────────────────────
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.header-content {
+  flex: 1;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  
+  @media (max-width: 640px) {
+    width: 100%;
+    
+    .btn {
+      flex: 1;
+    }
+  }
+}
+
+.btn {
+  height: 44px;
+  padding: 0 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  
+  &.btn-primary {
+    background: linear-gradient(135deg, #0891B2 0%, #06B6D4 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(8, 145, 178, 0.35);
+    }
+  }
+  
+  &.btn-secondary {
+    background: white;
+    color: #374151;
+    border: 1px solid #E5E7EB;
+    
+    &:hover {
+      background: #F9FAFB;
+      border-color: #D1D5DB;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.btn-text {
+  background: transparent;
+  border: none;
+  color: #0891B2;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(8, 145, 178, 0.1);
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// STATS CARDS - Modern Glassmorphic Design
+// ────────────────────────────────────────────────────────────
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #F3F4F6;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    opacity: 0.05;
+    transition: all 0.4s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    
+    &::before {
+      transform: scale(1.2);
+      opacity: 0.08;
+    }
+  }
+  
+  // Color variations
+  &.stat-students {
+    &::before { background: #0891B2; }
+    .stat-icon { background: linear-gradient(135deg, #0891B2, #06B6D4); }
+    .stat-chart path { color: #0891B2; }
+  }
+  
+  &.stat-revenue {
+    &::before { background: #9333EA; }
+    .stat-icon { background: linear-gradient(135deg, #9333EA, #A855F7); }
+    .stat-chart path { color: #9333EA; }
+  }
+  
+  &.stat-courses {
+    &::before { background: #F59E0B; }
+    .stat-icon { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+    .progress-fill { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
+  }
+  
+  &.stat-teachers {
+    &::before { background: #10B981; }
+    .stat-icon { background: linear-gradient(135deg, #10B981, #34D399); }
+    .progress-fill { background: linear-gradient(90deg, #10B981, #34D399); }
+  }
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-body {
+  margin-bottom: 1rem;
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-change {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  
+  &.positive {
+    color: #10B981;
+  }
+  
+  &.negative {
+    color: #EF4444;
+  }
+  
+  &.neutral {
+    color: #6B7280;
+  }
+  
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+.stat-chart {
+  margin-top: 1rem;
+  height: 40px;
+}
+
+.stat-progress {
+  .progress-bar {
+    height: 6px;
+    background: #F3F4F6;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease;
+  }
+  
+  .progress-text {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    font-weight: 500;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// CONTENT ROWS
+// ────────────────────────────────────────────────────────────
+
+.content-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// CARDS - Premium Modern Design
+// ────────────────────────────────────────────────────────────
+
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #F3F4F6;
+  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.card-title {
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  p {
+    font-size: 0.875rem;
+    color: #9CA3AF;
+    margin: 0;
+  }
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.period-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: white;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: #0891B2;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #0891B2;
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+  }
+}
+
+// Chart Cards
+.chart-card {
+  .card-body {
+    height: 320px;
+    
+    @media (max-width: 640px) {
+      height: 280px;
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// ACTIVITIES LIST
+// ────────────────────────────────────────────────────────────
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #F3F4F6;
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 3px;
+    
+    &:hover {
+      background: #9CA3AF;
+    }
+  }
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #F3F4F6;
+    transform: translateX(4px);
+  }
+}
+
+.activity-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  
+  &.success { background: linear-gradient(135deg, #10B981, #34D399); }
+  &.primary { background: linear-gradient(135deg, #0891B2, #06B6D4); }
+  &.info { background: linear-gradient(135deg, #3B82F6, #60A5FA); }
+  &.warning { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+}
+
+.activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.25rem 0;
+}
+
+.activity-meta {
+  font-size: 0.75rem;
+  color: #9CA3AF;
+  margin: 0;
+}
+
+// ────────────────────────────────────────────────────────────
+// TOP PERFORMERS
+// ────────────────────────────────────────────────────────────
+
+.performers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.performer-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #F3F4F6;
+    transform: translateX(4px);
+  }
+}
+
+.performer-rank {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #0891B2, #06B6D4);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.performer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.performer-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.performer-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.125rem;
+}
+
+.performer-course {
+  font-size: 0.75rem;
+  color: #9CA3AF;
+}
+
+.performer-score {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0891B2;
+  flex-shrink: 0;
+}
+
+// ────────────────────────────────────────────────────────────
+// UPCOMING EVENTS
+// ────────────────────────────────────────────────────────────
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.event-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #F3F4F6;
+    transform: translateX(4px);
+  }
+}
+
+.event-date {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #0891B2, #06B6D4);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+}
+
+.event-day {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.event-month {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.event-details {
+  flex: 1;
+}
+
+.event-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.375rem;
+}
+
+.event-meta {
+  font-size: 0.8125rem;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  i {
+    color: #9CA3AF;
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// CHART CUSTOMIZATION
+// ────────────────────────────────────────────────────────────
+
+::ng-deep {
+  .p-chart {
+    canvas {
+      max-height: 100%;
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// RESPONSIVE ADJUSTMENTS
+// ────────────────────────────────────────────────────────────
+
+@media (max-width: 1200px) {
+  .page-title {
+    font-size: 1.75rem;
+  }
+  
+  .stat-value {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+  
+  .stat-value {
+    font-size: 1.75rem;
+  }
+  
+  .btn span {
+    display: none;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// ANIMATIONS
+// ────────────────────────────────────────────────────────────
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card,
+.card {
+  animation: slideIn 0.5s ease backwards;
+  
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}

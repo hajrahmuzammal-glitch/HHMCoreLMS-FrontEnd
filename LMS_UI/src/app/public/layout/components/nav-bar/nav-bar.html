@@ -1,0 +1,103 @@
+<!-- Navbar Component HTML -->
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar__container">
+    
+    <!-- Logo -->
+    <a routerLink="/" class="navbar__logo" (click)="closeMobileMenu()">
+      <div class="navbar__logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7V17C2 18.1 2.9 19 4 19H20C21.1 19 22 18.1 22 17V7L12 2Z" fill="currentColor"/>
+          <path d="M12 22L2 17V7L12 12L22 7V17L12 22Z" fill="currentColor" opacity="0.6"/>
+        </svg>
+      </div>
+      <span class="navbar__logo-text">
+        <span class="navbar__logo-primary">HHM</span><span class="navbar__logo-accent">LMS</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul class="navbar__menu" [class.mobile-open]="mobileMenuOpen">
+      <li class="navbar__item">
+        <a routerLink="/home" 
+           routerLinkActive="active" 
+           class="navbar__link"
+           (click)="closeMobileMenu()">
+          <i class="pi pi-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a routerLink="/courses" 
+           routerLinkActive="active" 
+           class="navbar__link"
+           (click)="closeMobileMenu()">
+          <i class="pi pi-book"></i>
+          <span>Courses</span>
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a routerLink="/about" 
+           routerLinkActive="active" 
+           class="navbar__link"
+           (click)="closeMobileMenu()">
+          <i class="pi pi-info-circle"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a routerLink="/contact" 
+           routerLinkActive="active" 
+           class="navbar__link"
+           (click)="closeMobileMenu()">
+          <i class="pi pi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+
+      <!-- Mobile Auth Buttons -->
+      <li class="navbar__item navbar__item--mobile-only">
+        <a routerLink="/auth/login" 
+           class="navbar__link navbar__link--login"
+           (click)="closeMobileMenu()">
+          <i class="pi pi-sign-in"></i>
+          <span>Login</span>
+        </a>
+      </li>
+      <li class="navbar__item navbar__item--mobile-only">
+        <a routerLink="/auth/register" 
+           class="navbar__link navbar__link--cta"
+           (click)="closeMobileMenu()">
+          <i class="pi pi-user-plus"></i>
+          <span>Sign Up</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Desktop Auth Buttons -->
+    <div class="navbar__actions">
+      <a routerLink="/auth/login" class="navbar__btn navbar__btn--secondary">
+        <i class="pi pi-sign-in"></i>
+        <span>Login</span>
+      </a>
+      <a routerLink="/auth/register" class="navbar__btn navbar__btn--primary">
+        <i class="pi pi-user-plus"></i>
+        <span>Sign Up</span>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button 
+      class="menu-toggle" 
+      [class.active]="mobileMenuOpen"
+      (click)="toggleMobileMenu()"
+      aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Progress Bar (shows on scroll) -->
+  <div class="navbar__progress" [class.visible]="isScrolled"></div>
+</nav>

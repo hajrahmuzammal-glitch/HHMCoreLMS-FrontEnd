@@ -1,0 +1,512 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+:host { display: block; }
+
+// ═══════════════════════════════════════════════════════════
+// STATS SECTION — Editorial Split Panel
+// Dark navy left (stats) / Light right (image + caption)
+// ═══════════════════════════════════════════════════════════
+
+.stats-section {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(520px, 60vw, 720px);
+  display: flex;
+  align-items: stretch;
+
+  @include m.respond-to-max('lg') {
+    flex-direction: column;
+    min-height: auto;
+  }
+}
+
+// ── BACKGROUND TEXTURE (subtle noise on dark panel) ───────
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 52%;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(v.$accent, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(v.$primary-light, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+
+  @include m.respond-to-max('lg') { width: 100%; }
+}
+
+// ══════════════════════════════════════════════════════════
+// LEFT PANEL — Dark stats editorial
+// ══════════════════════════════════════════════════════════
+
+.panel-stats {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 52%;
+  background: v.$primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 5vw, 5rem) clamp(2.5rem, 5vw, 5rem);
+
+  @include m.respond-to-max('lg') {
+    flex: none;
+    padding: 4rem 2rem 3.5rem;
+  }
+}
+
+// ── EYEBROW ───────────────────────────────────────────────
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.eyebrow-line {
+  width: 36px;
+  height: 2px;
+  background: v.$accent;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(v.$white, 0.6);
+    transform: translateX(-100%);
+    animation: line-sweep 2.8s ease-in-out infinite 1s;
+  }
+}
+
+@keyframes line-sweep {
+  0%   { transform: translateX(-100%); }
+  40%  { transform: translateX(100%);  }
+  100% { transform: translateX(100%);  }
+}
+
+.eyebrow-text {
+  font-family: v.$font-body;
+  font-size: 0.7rem;
+  font-weight: v.$font-semibold;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: v.$accent;
+}
+
+// ── HEADING ───────────────────────────────────────────────
+
+.panel-heading {
+  font-family: v.$font-heading;
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
+  font-weight: v.$font-bold;
+  color: v.$white;
+  line-height: 1.15;
+  margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+  max-width: 480px;
+}
+
+.heading-highlight {
+  position: relative;
+  color: v.$accent;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, v.$accent, transparent);
+    border-radius: 2px;
+  }
+}
+
+// ── STATS GRID — 2×2 with hairline dividers ───────────────
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+
+  // Vertical center divider
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(v.$white, 0.12) 20%,
+      rgba(v.$white, 0.12) 80%,
+      transparent 100%
+    );
+  }
+
+  // Horizontal center divider
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(v.$white, 0.12) 15%,
+      rgba(v.$white, 0.12) 85%,
+      transparent 100%
+    );
+  }
+}
+
+// ── SINGLE STAT CELL ──────────────────────────────────────
+
+.stat-cell {
+  padding: clamp(1.4rem, 2.5vw, 2.2rem) clamp(1.2rem, 2vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+
+  // Stagger delays
+  &:nth-child(1) { transition-delay: 0.0s; }
+  &:nth-child(2) { transition-delay: 0.12s; }
+  &:nth-child(3) { transition-delay: 0.24s; }
+  &:nth-child(4) { transition-delay: 0.36s; }
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // Accent dot top-left of each cell
+  &::before {
+    content: '';
+    position: absolute;
+    top: clamp(1.4rem, 2.5vw, 2.2rem);
+    left: clamp(1.2rem, 2vw, 2rem);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: v.$accent;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease 0.5s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+  }
+
+  &.is-visible::before {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+// ── STAT NUMBER ───────────────────────────────────────────
+
+.stat-number {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  line-height: 1;
+}
+
+.stat-value {
+  font-family: v.$font-heading;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: v.$font-extrabold;
+  color: v.$white;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  // Tab-nums for cleaner count-up
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-suffix {
+  font-family: v.$font-heading;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: v.$font-bold;
+  color: v.$accent;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.stat-label {
+  font-family: v.$font-body;
+  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  font-weight: v.$font-medium;
+  color: rgba(v.$white, 0.45);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  padding-left: 14px; // offset from accent dot
+  margin-top: 2px;
+}
+
+// ── BOTTOM CTA STRIP ─────────────────────────────────────
+
+.panel-footer {
+  margin-top: clamp(2rem, 3vw, 3rem);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: clamp(1.5rem, 2vw, 2rem);
+  border-top: 1px solid rgba(v.$white, 0.1);
+}
+
+.footer-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: v.$radius-full;
+  background: rgba(v.$white, 0.06);
+  border: 1px solid rgba(v.$white, 0.1);
+  transition: background v.$transition-base, border-color v.$transition-base;
+
+  &:hover {
+    background: rgba(v.$accent, 0.12);
+    border-color: rgba(v.$accent, 0.3);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    stroke: v.$accent;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 0.78rem;
+    font-weight: v.$font-semibold;
+    color: v.$white;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+}
+
+.footer-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(v.$white, 0.15);
+}
+
+.footer-since {
+  font-size: 0.72rem;
+  font-weight: v.$font-medium;
+  color: rgba(v.$white, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+// ══════════════════════════════════════════════════════════
+// RIGHT PANEL — Image with caption overlay
+// ══════════════════════════════════════════════════════════
+
+.panel-image {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+  min-height: 400px;
+
+  @include m.respond-to-max('lg') {
+    min-height: 320px;
+    max-height: 420px;
+  }
+}
+
+.panel-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 8s ease;
+
+  .stats-section:hover & {
+    transform: scale(1.04);
+  }
+}
+
+// Gradient overlay fading left edge into dark panel
+.image-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    v.$primary 0%,
+    rgba(v.$primary, 0.35) 30%,
+    transparent 60%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+// Bottom overlay for caption
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: linear-gradient(
+    to top,
+    rgba(v.$primary-dark, 0.88) 0%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.caption-text {
+  h3 {
+    font-family: v.$font-heading;
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    font-weight: v.$font-semibold;
+    color: v.$white;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 0.78rem;
+    color: rgba(v.$white, 0.55);
+    letter-spacing: 0.05em;
+    font-weight: v.$font-medium;
+  }
+}
+
+.caption-badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: v.$accent;
+  border-radius: v.$radius-base;
+  box-shadow: 0 8px 24px rgba(v.$accent, 0.35);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: v.$primary-dark;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 0.8rem;
+    font-weight: v.$font-bold;
+    color: v.$primary-dark;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+}
+
+// ── Corner bracket accents on image panel ────────────────
+
+.bracket {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  z-index: 3;
+  border-color: rgba(v.$accent, 0.5);
+  border-style: solid;
+
+  &-tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; border-radius: 0 3px 0 0; }
+  &-bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; border-radius: 0 0 3px 0; }
+}
+
+// ── Floating accent line ──────────────────────────────────
+
+.image-accent-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, v.$accent, transparent);
+  z-index: 3;
+  transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+
+  .stats-section.is-visible & {
+    height: 40%;
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// RESPONSIVE
+// ══════════════════════════════════════════════════════════
+
+@include m.respond-to-max('md') {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-value {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .panel-footer {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@include m.respond-to-max('sm') {
+  .stats-grid {
+    grid-template-columns: 1fr;
+
+    &::before { display: none; }
+
+    &::after {
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(v.$white, 0.12) 15%,
+        rgba(v.$white, 0.12) 85%,
+        transparent 100%
+      );
+    }
+  }
+
+  .stat-cell {
+    &::before { display: none; }
+    .stat-label { padding-left: 0; }
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// ACCESSIBILITY
+// ══════════════════════════════════════════════════════════
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-cell {
+    transition: opacity 0.01ms !important;
+    transform: none !important;
+  }
+
+  .eyebrow-line::after { animation: none; }
+  .image-accent-line   { transition: none; height: 40%; }
+
+  .panel-image img { transition: none; }
+}

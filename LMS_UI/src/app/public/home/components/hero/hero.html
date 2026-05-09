@@ -1,0 +1,116 @@
+
+<!-- Hero Section Html-->
+<section class="hero" [attr.data-slide]="currentSlide">
+  
+  <!-- Background Images with img tags -->
+  <div class="hero__backgrounds">
+    <img 
+      *ngFor="let slide of slides; let i = index"
+      [src]="slide.backgroundImage"
+      [class.active]="i === currentSlide"
+      class="hero__background-img"
+      [attr.alt]="'Background for ' + slide.title"
+      loading="eager"
+    >
+  </div>
+
+  <!-- Dark Overlay for Better Text Contrast -->
+  <div class="hero__overlay"></div>
+
+  <!-- Main Content Container -->
+  <div class="hero__container">
+    <div class="hero__content">
+      
+      <!-- Main Heading -->
+      <h1 class="hero__title" 
+          [attr.data-aos]="'fade-up'" 
+          [attr.data-aos-delay]="'200'">
+        {{ currentSlideData.title }}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero__subtitle" 
+         [attr.data-aos]="'fade-up'" 
+         [attr.data-aos-delay]="'400'">
+        {{ currentSlideData.subtitle }}
+      </p>
+
+      <!-- Search Bar -->
+      <div class="hero__search" 
+           [attr.data-aos]="'fade-up'" 
+           [attr.data-aos-delay]="'600'">
+        <form (ngSubmit)="onSearchSubmit()" class="search-form">
+          <div class="search-form__container">
+            <!-- Search Input -->
+            <input 
+              #searchInput
+              type="text" 
+              [(ngModel)]="searchQuery"
+              [placeholder]="currentSlideData.searchPlaceholder"
+              class="search-form__input"
+              name="search"
+              (focus)="onSearchFocus()"
+              (blur)="onSearchBlur()"
+              aria-label="Search courses and topics"
+            >
+            
+            <!-- Search Button -->
+            <button 
+              type="submit" 
+              class="search-form__button"
+              [disabled]="!searchQuery.trim()"
+              aria-label="Search">
+              <svg class="search-form__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Quick Action Buttons -->
+        <div class="hero__actions">
+          <button class="btn btn--primary btn--large">
+            <span>Explore Courses</span>
+          </button>
+          <button class="btn btn--outline btn--large">
+            <span>Learn More</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Navigation Dots -->
+  <div class="hero__pagination">
+    <div class="hero__dots">
+      <button 
+        *ngFor="let slide of slides; let i = index"
+        (click)="goToSlide(i)"
+        class="hero__dot"
+        [class.active]="i === currentSlide"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"
+      ></button>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button 
+    class="hero__arrow hero__arrow--prev"
+    (click)="previousSlide()"
+    aria-label="Previous slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <polyline points="15,18 9,12 15,6"></polyline>
+    </svg>
+  </button>
+
+  <button 
+    class="hero__arrow hero__arrow--next"
+    (click)="nextSlide()"
+    aria-label="Next slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <polyline points="9,18 15,12 9,6"></polyline>
+    </svg>
+  </button>
+
+</section>
